@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import '../models/doctor_model.dart';
 import '../providers/auth_provider.dart';
 import '../providers/clinic_data_provider.dart';
 import '../routing/app_router.dart';
+import '../services/notification_service.dart';
 import '../theme/sehatku_theme.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -303,7 +305,69 @@ class ProfileScreen extends StatelessWidget {
                   'Aktifkan pengingat otomatis sebelum tanggal kontrol ulang',
                 ),
                 value: provider.reminderEnabled,
-                onChanged: provider.toggleReminder,
+                onChanged: (val) async {
+                  if (val) {
+                    final perm = await NotificationService.instance
+                        .requestPermission();
+                    if (!context.mounted) return;
+                    if (!perm.granted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(perm.message),
+                          action: perm.permanentlyDenied
+                              ? const SnackBarAction(
+                                  label: 'Pengaturan',
+                                  onPressed: openAppSettings,
+                                )
+                              : null,
+                        ),
+                      );
+                      return;
+                    }
+                  } else {
+                    await NotificationService.instance.cancelAll();
+                  }
+                  await provider.toggleReminder(val);
+                },
+              ),
+              const Divider(height: 1),
+              ListTile(
+                key: const Key('test_notification_tile'),
+                leading: const Icon(Icons.notification_add_outlined),
+                title: const Text('Uji Notifikasi Pengingat Kontrol'),
+                subtitle: const Text(
+                  'Kirim pengingat lokal jadwal kontrol terdekat sekarang',
+                ),
+                trailing: TextButton(
+                  onPressed: () async {
+                    final nextControl = provider.medicalRecords.isNotEmpty
+                        ? provider.medicalRecords.first.nextControlDate
+                        : 'sesuai jadwal klinik';
+                    final res = await NotificationService.instance
+                        .scheduleControlReminder(
+                          id: 901,
+                          title: 'Pengingat Kontrol SehatKu',
+                          body:
+                              'Halo ${profile['name'] ?? 'Pasien'}, jadwal kontrol ulang terdekat Anda: $nextControl.',
+                          scheduledAt: DateTime.now().add(
+                            const Duration(seconds: 5),
+                          ),
+                        );
+                    if (!context.mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(res.message),
+                        action: res.permanentlyDenied
+                            ? const SnackBarAction(
+                                label: 'Pengaturan',
+                                onPressed: openAppSettings,
+                              )
+                            : null,
+                      ),
+                    );
+                  },
+                  child: const Text('Kirim'),
+                ),
               ),
               const Divider(height: 1),
               SwitchListTile(

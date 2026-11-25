@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'providers/auth_provider.dart';
 import 'providers/clinic_data_provider.dart';
 import 'routing/app_router.dart';
+import 'services/notification_service.dart';
 import 'theme/sehatku_theme.dart';
 
 void main() {
@@ -19,6 +20,7 @@ void main() {
     }
   });
 
+  NotificationService.instance.initialize();
   authProvider.restoreSession();
   clinicProvider.initializeAll();
 

@@ -12,6 +12,7 @@ class MedicalRecord {
   final double bodyWeightKg;
   final String nextControlDate;
   final String notes;
+  final String? documentPhotoPath;
 
   const MedicalRecord({
     this.id,
@@ -27,6 +28,7 @@ class MedicalRecord {
     required this.bodyWeightKg,
     required this.nextControlDate,
     required this.notes,
+    this.documentPhotoPath,
   });
 
   MedicalRecord copyWith({
@@ -43,6 +45,8 @@ class MedicalRecord {
     double? bodyWeightKg,
     String? nextControlDate,
     String? notes,
+    String? documentPhotoPath,
+    bool clearDocumentPhoto = false,
   }) {
     return MedicalRecord(
       id: id ?? this.id,
@@ -59,10 +63,14 @@ class MedicalRecord {
       bodyWeightKg: bodyWeightKg ?? this.bodyWeightKg,
       nextControlDate: nextControlDate ?? this.nextControlDate,
       notes: notes ?? this.notes,
+      documentPhotoPath: clearDocumentPhoto
+          ? null
+          : (documentPhotoPath ?? this.documentPhotoPath),
     );
   }
 
   factory MedicalRecord.fromMap(Map<String, dynamic> map) {
+    final rawPhoto = map['document_photo_path']?.toString();
     return MedicalRecord(
       id: (map['id'] as num?)?.toInt(),
       patientName: map['patient_name']?.toString() ?? '',
@@ -79,6 +87,8 @@ class MedicalRecord {
       bodyWeightKg: (map['body_weight_kg'] as num?)?.toDouble() ?? 60.0,
       nextControlDate: map['next_control_date']?.toString() ?? '-',
       notes: map['notes']?.toString() ?? '',
+      documentPhotoPath:
+          (rawPhoto != null && rawPhoto.isNotEmpty) ? rawPhoto : null,
     );
   }
 
@@ -97,6 +107,7 @@ class MedicalRecord {
       'body_weight_kg': bodyWeightKg,
       'next_control_date': nextControlDate,
       'notes': notes,
+      'document_photo_path': documentPhotoPath,
     };
   }
 }

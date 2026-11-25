@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../models/doctor_model.dart';
 import '../providers/clinic_data_provider.dart';
+import '../services/notification_service.dart';
 import '../theme/sehatku_theme.dart';
 
 class BookingDetailScreen extends StatefulWidget {
@@ -94,6 +95,10 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
       paymentType: _paymentType,
       complaint: _complaintController.text.trim(),
     );
+
+    if (provider.reminderEnabled) {
+      await NotificationService.instance.showBookingNotification(created);
+    }
 
     if (!mounted) return;
     setState(() => _isSubmitting = false);

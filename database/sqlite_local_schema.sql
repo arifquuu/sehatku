@@ -18,7 +18,8 @@ CREATE TABLE IF NOT EXISTS medical_records (
   blood_pressure TEXT NOT NULL,
   body_weight_kg REAL NOT NULL,
   next_control_date TEXT NOT NULL,
-  notes TEXT NOT NULL
+  notes TEXT NOT NULL,
+  document_photo_path TEXT
 );
 
 -- 2. Tabel Riwayat Pendaftaran & Nomor Antrean Lokal (bookings)

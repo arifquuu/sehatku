@@ -20,7 +20,7 @@ class DatabaseHelper {
   DatabaseHelper._internal();
 
   static const String _dbName = 'sehatku_clinic.db';
-  static const int _dbVersion = 1;
+  static const int _dbVersion = 2;
 
   static const String tableMedicalRecords = 'medical_records';
   static const String tableBookings = 'bookings';
@@ -48,8 +48,17 @@ class DatabaseHelper {
       dbPath,
       version: _dbVersion,
       onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
     );
     return _database!;
+  }
+
+  Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await db.execute(
+        'ALTER TABLE $tableMedicalRecords ADD COLUMN document_photo_path TEXT',
+      );
+    }
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -67,7 +76,8 @@ class DatabaseHelper {
         blood_pressure TEXT NOT NULL,
         body_weight_kg REAL NOT NULL,
         next_control_date TEXT NOT NULL,
-        notes TEXT NOT NULL
+        notes TEXT NOT NULL,
+        document_photo_path TEXT
       )
     ''');
 
