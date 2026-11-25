@@ -4,7 +4,7 @@
 
 Proyek ini dikembangkan oleh **Kelompok 4** pada mata kuliah **Pengembangan Aplikasi Perangkat Bergerak (A)**, Program Studi Sistem Informasi, FMIPA Universitas Tanjungpura (Semester Ganjil 2026/2027, Dosen Pengampu: Syahru Rahmayuda, S.Kom., M.Kom.).
 
-> **Unduh Rilis Siap Pasang (`v1.0.0`):** [Android APK Release & Flutter Web Bundle](https://github.com/arifquuu/sehatku/releases/tag/v1.0.0)
+> **Unduh Rilis Final Siap Pasang (`v1.1.0`):** [Android APK Release & Flutter Web Bundle](https://github.com/arifquuu/sehatku/releases/tag/v1.1.0)
 
 ---
 
