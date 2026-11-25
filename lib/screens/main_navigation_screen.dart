@@ -205,6 +205,17 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   setState(() => _currentIndex = 3);
                 },
               ),
+              const Divider(height: 1),
+              ListTile(
+                key: const Key('drawer_async_lab_tile'),
+                leading: const Icon(Icons.bolt_outlined),
+                title: const Text('Lab Asinkron & Event Loop'),
+                subtitle: const Text('Demo sync vs async & error state'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, AppRouter.asyncLab);
+                },
+              ),
               const Spacer(),
               if (auth != null && auth.isAuthenticated) ...[
                 const Divider(height: 1),

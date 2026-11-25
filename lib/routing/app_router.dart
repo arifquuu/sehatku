@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../data/dummy_clinic_data.dart';
 import '../models/doctor_model.dart';
 import '../providers/auth_provider.dart';
+import '../screens/async_comparison_screen.dart';
 import '../screens/booking_detail_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/main_navigation_screen.dart';
@@ -17,6 +18,7 @@ class AppRouter {
   static const String records = '/rekam-medis';
   static const String profile = '/profil';
   static const String booking = BookingDetailScreen.routeName;
+  static const String asyncLab = '/async-lab';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -58,6 +60,13 @@ class AppRouter {
           settings: settings,
           builder: (_) => AuthGate(
             child: BookingDetailScreen(doctor: doctor),
+          ),
+        );
+      case asyncLab:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const AuthGate(
+            child: AsyncComparisonScreen(),
           ),
         );
       case home:
