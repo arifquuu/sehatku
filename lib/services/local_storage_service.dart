@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,8 +19,14 @@ class LocalStorageService {
 
   bool _initialized = false;
 
-  Future<void> init({String? customHivePath}) async {
+  Future<void> init({String? customHivePath, bool inMemory = false}) async {
     if (_initialized) return;
+    if (inMemory) {
+      await Hive.openBox(favoritesBoxName, bytes: Uint8List(0));
+      await Hive.openBox(profileBoxName, bytes: Uint8List(0));
+      _initialized = true;
+      return;
+    }
     if (customHivePath != null) {
       Hive.init(customHivePath);
     } else {
@@ -85,9 +93,7 @@ class LocalStorageService {
 
   Future<void> savePatientProfile(Map<String, String> profile) async {
     final box = Hive.box(profileBoxName);
-    for (final entry in profile.entries) {
-      await box.put(entry.key, entry.value);
-    }
+    await box.putAll(profile);
   }
 
   // =========================================================================

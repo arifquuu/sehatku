@@ -414,13 +414,18 @@ class ProfileScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  entry.key,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13,
+                                Expanded(
+                                  child: Text(
+                                    entry.key,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13,
+                                    ),
                                   ),
                                 ),
+                                const SizedBox(width: 8),
                                 Text(
                                   '${entry.value} kunjungan',
                                   style: const TextStyle(
@@ -511,7 +516,7 @@ class ProfileScreen extends StatelessWidget {
       children: [
         Icon(icon, size: 16, color: SehatKuColors.primary),
         const SizedBox(width: 6),
-        Text(text, style: const TextStyle(fontSize: 12.5)),
+        Flexible(child: Text(text, style: const TextStyle(fontSize: 12.5))),
       ],
     );
   }

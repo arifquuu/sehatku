@@ -191,10 +191,15 @@ class AsyncDemoService {
             'latencyMs': watch.elapsedMilliseconds,
           };
         case NetworkSimScenario.timeout:
-          await Future<String>.delayed(
-            delay + timeout,
-            () => 'late-response',
-          ).timeout(timeout);
+          final completer = Completer<String>();
+          final timer = Timer(delay + timeout, () {
+            if (!completer.isCompleted) completer.complete('late-response');
+          });
+          try {
+            await completer.future.timeout(timeout);
+          } finally {
+            timer.cancel();
+          }
           return const {};
         case NetworkSimScenario.offline:
           await Future<void>.delayed(const Duration(milliseconds: 220));
