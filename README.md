@@ -43,7 +43,8 @@ SehatKu dirancang untuk mengatasi tiga persoalan tersebut dalam satu alur kerja:
 | Fitur Perangkat | Notifikasi jadwal kontrol, lampiran foto resep/lab + izin | `flutter_local_notifications`, `timezone`, `image_picker`, `permission_handler` | `lib/services/notification_service.dart`, `lib/services/media_service.dart` |
 | Fitur Inovatif | Tiket QR antrean siap pindai (zona tenang putih di mode gelap) & Dark Mode | `qr_flutter`, Material 3 Light/Dark Theme | `lib/screens/qr_queue_ticket_screen.dart`, `lib/theme/sehatku_theme.dart` |
 | Pemrograman Asinkron | Lab Event Loop (sync vs async) & simulasi timeout/offline | Dart `Future`, `async/await`, `Future.wait`, `Completer`, `Timer` | `lib/services/async_demo_service.dart`, `tool/sync_vs_async_demo.dart` |
-| Pengujian Otomatis | 8 skenario unit test & widget test (mobile & tablet) | `flutter_test`, `http/testing` (`MockClient`) | `test/widget_test.dart`, `test/arif_features_test.dart` |
+| Pengujian Otomatis | 13 skenario unit test, widget test & TDD (mobile & tablet) | `flutter_test`, `http/testing` (`MockClient`) | `test/widget_test.dart`, `test/arif_features_test.dart`, `test/evan_validation_tdd_test.dart` |
+| Fitur Dasar & Widget Lokal | 3 program Dart dasar & checklist persiapan kunjungan (`setState`) | Dart 3, `StatefulWidget` (`setState`) | `dart_basics/`, `lib/widgets/clinic_prep_checklist_widget.dart`, `lib/utils/patient_validator.dart` |
 
 ---
 
@@ -80,6 +81,20 @@ flowchart LR
 
 ### Pratinjau Diagram ERD Sistem Klinik SehatKu
 ![ERD SehatKu](docs/erd/erd_sehatku_database.svg)
+
+### Cuplikan Layar Aplikasi & Pengujian (`docs/screenshots/`)
+
+| Halaman Masuk (`LoginScreen`) | Beranda (`HomeScreen`) |
+| :---: | :---: |
+| ![Login](docs/screenshots/03_login_screen.png) | ![Beranda](docs/screenshots/04_home_screen.png) |
+
+| Detail Booking & Widget `setState` | Tiket QR Antrean (`QrQueueTicketScreen`) |
+| :---: | :---: |
+| ![Booking & Widget setState](docs/screenshots/05_booking_detail_dan_widget_setstate.png) | ![QR Antrean](docs/screenshots/08_qr_queue_ticket_screen.png) |
+
+| Rekam Medis (`MedicalRecordScreen`) | Profil & Analitik Poli (`visitCountByPoli`) |
+| :---: | :---: |
+| ![Rekam Medis](docs/screenshots/06_medical_record_screen.png) | ![Profil & Rekap Poli](docs/screenshots/07_profile_screen_rekap_poli.png) |
 
 ---
 
@@ -163,10 +178,12 @@ sehatku/
 │   ├── screens/                 # Login, Register, Home, DoctorSchedule, BookingDetail, MedicalRecord, Profile, AsyncLab, QrTicket
 │   ├── services/                # ApiService, AuthService, AsyncDemoService, DatabaseHelper, LocalStorageService, NotificationService, MediaService
 │   ├── theme/                   # SehatKuTheme (Light/Dark Material 3) & breakpoint responsif
-│   ├── widgets/                 # DoctorCard & MedicalDocumentPreview (IO/Web safe)
+│   ├── utils/                   # PatientValidator (validasi NIK, nama, estimasi biaya & antrean TDD)
+│   ├── widgets/                 # DoctorCard, ClinicPrepChecklistWidget (setState), & MedicalDocumentPreview (IO/Web safe)
 │   └── main.dart                # Entry point MaterialApp, MultiProvider & AppRouter
+├── dart_basics/                 # 3 program Dart dasar bertema SehatKu (Tugas 2 - Evan)
 ├── tool/                        # Skrip CLI perbandingan sinkron vs asinkron Dart Event Loop
-└── test/                        # Pengujian unit & widget (widget_test.dart & arif_features_test.dart)
+└── test/                        # Pengujian unit & widget (widget_test.dart, arif_features_test.dart, evan_validation_tdd_test.dart)
 ```
 
 ---
@@ -181,6 +198,12 @@ sehatku/
 | [`docs/wireframe_dan_desain_ui.md`](docs/wireframe_dan_desain_ui.md) | Wireframe 3 layar utama dan panduan desain antarmuka |
 | [`docs/erd_database_sehatku.md`](docs/erd_database_sehatku.md) | Diagram ERD dan kamus data MySQL serta penyimpanan lokal |
 | [`docs/dokumentasi_bagian_fajri.md`](docs/dokumentasi_bagian_fajri.md) | Ringkasan pengerjaan jalur UI/UX & Data (Fajri) |
+| [`docs/analisis_flutter_sehatku.md`](docs/analisis_flutter_sehatku.md) | Analisis pemilihan Flutter & perbandingan `setState` vs `Provider` (Evan) |
+| [`docs/analisis_bisnis_sehatku.md`](docs/analisis_bisnis_sehatku.md) | Analisis bisnis rekap poli (`visitCountByPoli`) & nilai fitur inovatif (Evan) |
+| [`docs/tdd_dan_testing_evan.md`](docs/tdd_dan_testing_evan.md) | Dokumentasi QA, siklus TDD, bug log integrasi & rekomendasi (Evan) |
+| [`docs/laporan_akhir_sehatku.md`](docs/laporan_akhir_sehatku.md) | Laporan akhir proyek UAS PBL Kelompok 4 — SehatKu (Evan) |
+| [`docs/slide_presentasi_sehatku.md`](docs/slide_presentasi_sehatku.md) | Kerangka materi slide presentasi kelompok (Evan) |
+| [`docs/panduan_video_demo_sehatku.md`](docs/panduan_video_demo_sehatku.md) | Naskah & alur rekam video demo aplikasi 3–5 menit (Evan) |
 | [`database/mysql_sehatku_schema.sql`](database/mysql_sehatku_schema.sql) | Skema SQL MySQL (`sehatku_db`) siap impor ke phpMyAdmin |
 | [`database/sqlite_local_schema.sql`](database/sqlite_local_schema.sql) | Skema SQLite lokal (`medical_records` dan `bookings`) |
 
