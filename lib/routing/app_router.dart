@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../data/dummy_clinic_data.dart';
+import '../models/booking_model.dart';
 import '../models/doctor_model.dart';
 import '../providers/auth_provider.dart';
 import '../screens/async_comparison_screen.dart';
 import '../screens/booking_detail_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/main_navigation_screen.dart';
+import '../screens/qr_queue_ticket_screen.dart';
 import '../screens/register_screen.dart';
 
 class AppRouter {
@@ -19,6 +21,7 @@ class AppRouter {
   static const String profile = '/profil';
   static const String booking = BookingDetailScreen.routeName;
   static const String asyncLab = '/async-lab';
+  static const String qrTicket = '/qr-ticket';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -67,6 +70,17 @@ class AppRouter {
           settings: settings,
           builder: (_) => const AuthGate(
             child: AsyncComparisonScreen(),
+          ),
+        );
+      case qrTicket:
+        final arg = settings.arguments;
+        final ticket = arg is BookingAppointment
+            ? arg
+            : DummyClinicData.initialBookings.first;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => AuthGate(
+            child: QrQueueTicketScreen(booking: ticket),
           ),
         );
       case home:
