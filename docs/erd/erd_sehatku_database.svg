@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820" font-family="Segoe UI, Inter, Arial, sans-serif">
+  <defs>
+    <style>
+      .bg { fill: #F8FAFC; }
+      .title { font-size: 22px; font-weight: 800; fill: #0F172A; }
+      .subtitle { font-size: 13px; fill: #475569; }
+      .zone-mysql { fill: #F0FDFA; stroke: #0D9488; stroke-width: 2; stroke-dasharray: 7,4; rx: 18; }
+      .zone-local { fill: #EFF6FF; stroke: #0284C7; stroke-width: 2; stroke-dasharray: 7,4; rx: 18; }
+      .zone-title-teal { font-size: 15px; font-weight: 800; fill: #0F766E; }
+      .zone-title-blue { font-size: 15px; font-weight: 800; fill: #0369A1; }
+      .tbl { fill: #FFFFFF; stroke: #334155; stroke-width: 1.8; rx: 10; }
+      .hdr-teal { fill: #0D9488; }
+      .hdr-blue { fill: #0284C7; }
+      .hdr-purple { fill: #7C3AED; }
+      .hdr-text { font-size: 13px; font-weight: 800; fill: #FFFFFF; }
+      .pk { font-size: 11px; font-weight: 700; fill: #B45309; }
+      .fk { font-size: 11px; font-weight: 700; fill: #0369A1; }
+      .col { font-size: 11.5px; fill: #1E293B; }
+      .type { font-size: 10.5px; fill: #64748B; }
+      .rel { stroke: #0F766E; stroke-width: 2; fill: none; }
+      .rel-sync { stroke: #0284C7; stroke-width: 2; stroke-dasharray: 6,4; fill: none; }
+      .cardinal { font-size: 11px; font-weight: 800; fill: #0F172A; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="820" class="bg" />
+  <text x="640" y="36" text-anchor="middle" class="title">ENTITY RELATIONSHIP DIAGRAM (ERD) — SISTEM KLINIK SEHATKU</text>
+  <text x="640" y="57" text-anchor="middle" class="subtitle">Tugas 11 (Desain Basis Data) • Kelompok 4 • Skema Relasional MySQL (Backend Auth &amp; Klinik) + SQLite / Hive / SharedPreferences (Penyimpanan Lokal Flutter)</text>
+
+  <!-- ======================================================= -->
+  <!-- ZONA 1: MYSQL BACKEND DATABASE                          -->
+  <!-- ======================================================= -->
+  <rect x="30" y="78" width="810" height="712" class="zone-mysql" />
+  <text x="50" y="106" class="zone-title-teal">A. BASIS DATA SERVER TERPUSAT — MySQL (`sehatku_db`)</text>
+
+  <!-- TABLE: users -->
+  <g transform="translate(55, 128)">
+    <rect width="235" height="232" class="tbl" />
+    <rect width="235" height="32" rx="9" class="hdr-teal" />
+    <text x="117" y="21" text-anchor="middle" class="hdr-text">users (Pasien &amp; Admin)</text>
+    <text x="12" y="52" class="pk">PK</text><text x="38" y="52" class="col">id</text><text x="155" y="52" class="type">INT AI</text>
+    <text x="38" y="72" class="col">rm_number</text><text x="155" y="72" class="type">VARCHAR(20) UQ</text>
+    <text x="38" y="92" class="col">nik</text><text x="155" y="92" class="type">CHAR(16) UQ</text>
+    <text x="38" y="112" class="col">full_name</text><text x="155" y="112" class="type">VARCHAR(100)</text>
+    <text x="38" y="132" class="col">email</text><text x="155" y="132" class="type">VARCHAR(100) UQ</text>
+    <text x="38" y="152" class="col">password_hash</text><text x="155" y="152" class="type">VARCHAR(255)</text>
+    <text x="38" y="172" class="col">phone</text><text x="155" y="172" class="type">VARCHAR(20)</text>
+    <text x="38" y="192" class="col">blood_type</text><text x="155" y="192" class="type">VARCHAR(5)</text>
+    <text x="38" y="212" class="col">role</text><text x="155" y="212" class="type">ENUM('pasien','admin')</text>
+  </g>
+
+  <!-- TABLE: polyclinics -->
+  <g transform="translate(55, 430)">
+    <rect width="235" height="150" class="tbl" />
+    <rect width="235" height="32" rx="9" class="hdr-teal" />
+    <text x="117" y="21" text-anchor="middle" class="hdr-text">polyclinics (Master Poli)</text>
+    <text x="12" y="52" class="pk">PK</text><text x="38" y="52" class="col">id</text><text x="155" y="52" class="type">INT AI</text>
+    <text x="38" y="72" class="col">code</text><text x="155" y="72" class="type">VARCHAR(10) UQ</text>
+    <text x="38" y="92" class="col">name</text><text x="155" y="92" class="type">VARCHAR(80)</text>
+    <text x="38" y="112" class="col">floor_location</text><text x="155" y="112" class="type">VARCHAR(50)</text>
+    <text x="38" y="132" class="col">queue_prefix</text><text x="155" y="132" class="type">CHAR(1)</text>
+  </g>
+
+  <!-- TABLE: doctors -->
+  <g transform="translate(345, 415)">
+    <rect width="235" height="212" class="tbl" />
+    <rect width="235" height="32" rx="9" class="hdr-teal" />
+    <text x="117" y="21" text-anchor="middle" class="hdr-text">doctors (Dokter Praktik)</text>
+    <text x="12" y="52" class="pk">PK</text><text x="38" y="52" class="col">id</text><text x="155" y="52" class="type">INT AI</text>
+    <text x="12" y="72" class="fk">FK</text><text x="38" y="72" class="col">polyclinic_id</text><text x="155" y="72" class="type">INT</text>
+    <text x="38" y="92" class="col">doctor_code</text><text x="155" y="92" class="type">VARCHAR(20) UQ</text>
+    <text x="38" y="112" class="col">full_name</text><text x="155" y="112" class="type">VARCHAR(120)</text>
+    <text x="38" y="132" class="col">str_number</text><text x="155" y="132" class="type">VARCHAR(40)</text>
+    <text x="38" y="152" class="col">room_number</text><text x="155" y="152" class="type">VARCHAR(20)</text>
+    <text x="38" y="172" class="col">consultation_fee</text><text x="155" y="172" class="type">INT</text>
+    <text x="38" y="192" class="col">daily_quota</text><text x="155" y="192" class="type">INT</text>
+  </g>
+
+  <!-- TABLE: doctor_schedules -->
+  <g transform="translate(345, 650)">
+    <rect width="235" height="122" class="tbl" />
+    <rect width="235" height="30" rx="9" class="hdr-teal" />
+    <text x="117" y="20" text-anchor="middle" class="hdr-text">doctor_schedules</text>
+    <text x="12" y="50" class="pk">PK</text><text x="38" y="50" class="col">id</text><text x="155" y="50" class="type">INT AI</text>
+    <text x="12" y="70" class="fk">FK</text><text x="38" y="70" class="col">doctor_id</text><text x="155" y="70" class="type">INT</text>
+    <text x="38" y="90" class="col">day_of_week</text><text x="155" y="90" class="type">VARCHAR(30)</text>
+    <text x="38" y="110" class="col">session_range</text><text x="155" y="110" class="type">VARCHAR(30)</text>
+  </g>
+
+  <!-- TABLE: appointments -->
+  <g transform="translate(595, 128)">
+    <rect width="230" height="232" class="tbl" />
+    <rect width="230" height="32" rx="9" class="hdr-teal" />
+    <text x="115" y="21" text-anchor="middle" class="hdr-text">appointments (Booking)</text>
+    <text x="12" y="52" class="pk">PK</text><text x="38" y="52" class="col">id</text><text x="150" y="52" class="type">INT AI</text>
+    <text x="12" y="72" class="fk">FK</text><text x="38" y="72" class="col">user_id</text><text x="150" y="72" class="type">INT</text>
+    <text x="12" y="92" class="fk">FK</text><text x="38" y="92" class="col">doctor_id</text><text x="150" y="92" class="type">INT</text>
+    <text x="38" y="112" class="col">queue_number</text><text x="150" y="112" class="type">VARCHAR(12)</text>
+    <text x="38" y="132" class="col">visit_date</text><text x="150" y="132" class="type">DATE</text>
+    <text x="38" y="152" class="col">session_time</text><text x="150" y="152" class="type">VARCHAR(30)</text>
+    <text x="38" y="172" class="col">payment_type</text><text x="150" y="172" class="type">ENUM('BPJS','Umum')</text>
+    <text x="38" y="192" class="col">complaint</text><text x="150" y="192" class="type">TEXT</text>
+    <text x="38" y="212" class="col">status</text><text x="150" y="212" class="type">ENUM(...)</text>
+  </g>
+
+  <!-- TABLE: medical_records (MySQL) -->
+  <g transform="translate(595, 415)">
+    <rect width="230" height="232" class="tbl" />
+    <rect width="230" height="32" rx="9" class="hdr-teal" />
+    <text x="115" y="21" text-anchor="middle" class="hdr-text">medical_records</text>
+    <text x="12" y="52" class="pk">PK</text><text x="38" y="52" class="col">id</text><text x="150" y="52" class="type">INT AI</text>
+    <text x="12" y="72" class="fk">FK</text><text x="38" y="72" class="col">appointment_id</text><text x="150" y="72" class="type">INT NULL</text>
+    <text x="12" y="92" class="fk">FK</text><text x="38" y="92" class="col">user_id</text><text x="150" y="92" class="type">INT</text>
+    <text x="12" y="112" class="fk">FK</text><text x="38" y="112" class="col">doctor_id</text><text x="150" y="112" class="type">INT</text>
+    <text x="38" y="132" class="col">diagnosis</text><text x="150" y="132" class="type">VARCHAR(180)</text>
+    <text x="38" y="152" class="col">prescription</text><text x="150" y="152" class="type">TEXT</text>
+    <text x="38" y="172" class="col">blood_pressure</text><text x="150" y="172" class="type">VARCHAR(20)</text>
+    <text x="38" y="192" class="col">body_weight_kg</text><text x="150" y="192" class="type">DECIMAL(5,2)</text>
+    <text x="38" y="212" class="col">next_control_date</text><text x="150" y="212" class="type">DATE NULL</text>
+  </g>
+
+  <!-- RELATION LINES IN MYSQL -->
+  <!-- users 1 -> N appointments -->
+  <path d="M290 200 L595 200" class="rel" />
+  <text x="302" y="193" class="cardinal">1</text>
+  <text x="578" y="193" class="cardinal">N</text>
+
+  <!-- users 1 -> N medical_records -->
+  <path d="M290 310 L460 310 L460 385 L640 385 L640 415" class="rel" />
+  <text x="302" y="304" class="cardinal">1</text>
+  <text x="647" y="408" class="cardinal">N</text>
+
+  <!-- polyclinics 1 -> N doctors -->
+  <path d="M290 505 L345 505" class="rel" />
+  <text x="298" y="498" class="cardinal">1</text>
+  <text x="332" y="498" class="cardinal">N</text>
+
+  <!-- doctors 1 -> N doctor_schedules -->
+  <path d="M462 627 L462 650" class="rel" />
+  <text x="470" y="640" class="cardinal">1:N</text>
+
+  <!-- doctors 1 -> N appointments -->
+  <path d="M510 415 L510 240 L595 240" class="rel" />
+  <text x="516" y="407" class="cardinal">1</text>
+  <text x="580" y="234" class="cardinal">N</text>
+
+  <!-- appointments 1 -> 0..1 medical_records -->
+  <path d="M710 360 L710 415" class="rel" />
+  <text x="718" y="378" class="cardinal">1</text>
+  <text x="718" y="408" class="cardinal">0..1</text>
+
+  <!-- ======================================================= -->
+  <!-- ZONA 2: PENYIMPANAN LOKAL FLUTTER (SQLITE + HIVE/PREFS) -->
+  <!-- ======================================================= -->
+  <rect x="865" y="78" width="385" height="712" class="zone-local" />
+  <text x="885" y="106" class="zone-title-blue">B. STORAGE LOKAL PERANGKAT (`sehatku_clinic.db`)</text>
+
+  <!-- SQLITE: bookings -->
+  <g transform="translate(890, 128)">
+    <rect width="335" height="196" class="tbl" />
+    <rect width="335" height="32" rx="9" class="hdr-blue" />
+    <text x="167" y="21" text-anchor="middle" class="hdr-text">SQLite: bookings (Antrean Lokal)</text>
+    <text x="14" y="52" class="pk">PK</text><text x="42" y="52" class="col">id</text><text x="225" y="52" class="type">INTEGER PK AI</text>
+    <text x="42" y="72" class="col">queue_number, doctor_id</text><text x="225" y="72" class="type">TEXT NOT NULL</text>
+    <text x="42" y="92" class="col">doctor_name, poli, room</text><text x="225" y="92" class="type">TEXT NOT NULL</text>
+    <text x="42" y="112" class="col">patient_name, patient_nik</text><text x="225" y="112" class="type">TEXT NOT NULL</text>
+    <text x="42" y="132" class="col">visit_date, session_time</text><text x="225" y="132" class="type">TEXT NOT NULL</text>
+    <text x="42" y="152" class="col">payment_type, complaint</text><text x="225" y="152" class="type">TEXT NOT NULL</text>
+    <text x="42" y="172" class="col">status, created_at</text><text x="225" y="172" class="type">TEXT NOT NULL</text>
+  </g>
+
+  <!-- SQLITE: medical_records -->
+  <g transform="translate(890, 355)">
+    <rect width="335" height="212" class="tbl" />
+    <rect width="335" height="32" rx="9" class="hdr-blue" />
+    <text x="167" y="21" text-anchor="middle" class="hdr-text">SQLite: medical_records (CRUD)</text>
+    <text x="14" y="52" class="pk">PK</text><text x="42" y="52" class="col">id</text><text x="225" y="52" class="type">INTEGER PK AI</text>
+    <text x="42" y="72" class="col">patient_name</text><text x="225" y="72" class="type">TEXT NOT NULL</text>
+    <text x="42" y="92" class="col">medical_record_number</text><text x="225" y="92" class="type">TEXT NOT NULL</text>
+    <text x="42" y="112" class="col">visit_date, poli</text><text x="225" y="112" class="type">TEXT NOT NULL</text>
+    <text x="42" y="132" class="col">doctor_name, diagnosis</text><text x="225" y="132" class="type">TEXT NOT NULL</text>
+    <text x="42" y="152" class="col">symptoms, treatment_prescription</text><text x="225" y="152" class="type">TEXT NOT NULL</text>
+    <text x="42" y="172" class="col">blood_pressure, body_weight_kg</text><text x="225" y="172" class="type">TEXT / REAL</text>
+    <text x="42" y="192" class="col">next_control_date, notes</text><text x="225" y="192" class="type">TEXT NOT NULL</text>
+  </g>
+
+  <!-- HIVE & SHARED PREFERENCES -->
+  <g transform="translate(890, 595)">
+    <rect width="335" height="172" class="tbl" />
+    <rect width="335" height="32" rx="9" class="hdr-purple" />
+    <text x="167" y="21" text-anchor="middle" class="hdr-text">Hive Box &amp; SharedPreferences</text>
+    <text x="16" y="54" class="fk">HIVE</text><text x="58" y="54" class="col">favorite_doctor_ids</text><text x="230" y="54" class="type">List&lt;String&gt;</text>
+    <text x="16" y="74" class="fk">HIVE</text><text x="58" y="74" class="col">sehatku_profile_box</text><text x="230" y="74" class="type">Map&lt;String,String&gt;</text>
+    <text x="16" y="102" class="pk">PREF</text><text x="58" y="102" class="col">pref_dark_mode</text><text x="230" y="102" class="type">BOOL</text>
+    <text x="16" y="122" class="pk">PREF</text><text x="58" y="122" class="col">pref_reminder_enabled</text><text x="230" y="122" class="type">BOOL</text>
+    <text x="16" y="142" class="pk">PREF</text><text x="58" y="142" class="col">pref_compact_cards</text><text x="230" y="142" class="type">BOOL</text>
+    <text x="16" y="160" class="pk">PREF</text><text x="58" y="160" class="col">pref_last_selected_poli</text><text x="230" y="160" class="type">STRING</text>
+  </g>
+
+  <!-- Sync Dashed Lines MySQL <-> SQLite -->
+  <path d="M825 225 L890 225" class="rel-sync" />
+  <path d="M825 500 L890 500" class="rel-sync" />
+</svg>
