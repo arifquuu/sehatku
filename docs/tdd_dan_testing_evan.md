@@ -14,7 +14,9 @@ Seluruh pengujian otomatis berada di folder `test/` menggunakan `flutter_test`:
 | [`test/arif_features_test.dart`](../test/arif_features_test.dart) | `AuthProvider` login/register/logout/restore sesi (Tugas 7 & 11), `AuthGate` proteksi rute (Tugas 5), `AsyncDemoService` (Tugas 8), `MediaService` (Tugas 12), `QrQueueTicketScreen` (Tugas 14) | 4 test |
 | [`test/evan_validation_tdd_test.dart`](../test/evan_validation_tdd_test.dart) | Validasi NIK & nama pasien, estimasi biaya BPJS/Umum & waktu tunggu, ketersediaan kuota jadwal, fungsi TDD `formatQueueNumber`, serta widget test `ClinicPrepChecklistWidget` (`setState`) | 5 test |
 
-**Total keseluruhan:** 13 skenario pengujian otomatis (`flutter test`).
+**Total keseluruhan:** 13 skenario pengujian otomatis (`flutter test`), seluruhnya lulus (`13/13 passed` — log tersimpan di [`docs/logs/flutter_test_results.txt`](logs/flutter_test_results.txt)).
+
+![Hasil Flutter Test](screenshots/02_hasil_flutter_test.png)
 
 ---
 

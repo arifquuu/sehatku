@@ -36,7 +36,7 @@ Pada aplikasi SehatKu, manajemen state dibagi menjadi dua tingkatan sesuai cakup
 
 ### A. Kapan `setState` Cukup?
 `setState` sudah cukup untuk **ephemeral state** (state lokal sementara) yang hanya memengaruhi satu widget mandiri dan tidak perlu dibagikan ke halaman lain.  
-Contoh di SehatKu adalah **`ClinicPrepChecklistWidget`** (`lib/widgets/clinic_prep_checklist_widget.dart`) pada halaman Beranda:
+Contoh di SehatKu adalah **`ClinicPrepChecklistWidget`** (`lib/widgets/clinic_prep_checklist_widget.dart`) pada halaman Detail Dokter & Booking:
 - Menyimpan status centang checklist persiapan berkas (KTP, kartu BPJS, daftar obat).
 - Mengatur angka simulasi antrean di depan (`_queuesAhead`) untuk menghitung estimasi waktu tunggu.
 - Mengatur status buka/tutup panel (`_expanded`).

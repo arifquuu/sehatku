@@ -16,13 +16,14 @@ Gunakan panduan ini saat merekam layar (OBS Studio / Xbox Game Bar / Screen Reco
 - Perkenalkan diri (Evan, Kelompok 4) dan tujuan aplikasi SehatKu.
 - Tunjukkan halaman `/login` (proteksi rute `AuthGate`), lalu masuk menggunakan akun MySQL atau klik **Masuk Mode Demo Lokal**.
 
-### 2. Beranda & Widget `setState` (00:35 – 01:20)
-- Tunjukkan kartu identitas pasien, kolom pencarian dokter, filter chip poli, dan **Widget Persiapan Kunjungan Klinik (`ClinicPrepChecklistWidget`)**.
-- Centang salah satu item checklist dan klik tombol `+` pada estimasi antrean untuk menunjukkan perubahan state lokal secara langsung.
+### 2. Beranda & Pencarian Dokter (00:35 – 01:15)
+- Tunjukkan kartu identitas pasien, kolom pencarian dokter, dan filter chip poli pada Beranda.
 
-### 3. Jadwal Dokter, REST API & Booking Online + QR Antrean (01:20 – 02:25)
+### 3. Jadwal Dokter, Widget `setState` & Booking + QR Antrean (01:15 – 02:25)
 - Buka tab **Jadwal**, ubah tampilan Daftar ↔ Grid (atau perbesar jendela jika di Web/Tablet untuk menunjukkan responsivitas).
-- Pilih salah satu dokter → masuk ke halaman **Booking Detail** → pilih tanggal, sesi jam, penjamin (BPJS/Umum), isi keluhan → konfirmasi.
+- Pilih salah satu dokter → masuk ke halaman **Detail Dokter & Booking**.
+- Tunjukkan **Widget Persiapan Kunjungan Klinik (`ClinicPrepChecklistWidget`)** berbasis `setState`: centang salah satu item checklist dan klik tombol `+` pada estimasi antrean untuk menunjukkan perubahan state lokal secara langsung.
+- Pilih tanggal, sesi jam, penjamin (BPJS/Umum), isi keluhan → konfirmasi.
 - Buka **Tiket QR Antrean** dan tunjukkan nomor antrean serta kode QR siap pindai.
 
 ### 4. Rekam Medis Offline-First & Lampiran Foto (02:25 – 03:10)

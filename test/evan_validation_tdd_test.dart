@@ -131,7 +131,7 @@ void main() {
         await tester.pump();
         expect(find.text('Antrean di depan: 3 • Est. 30 menit'), findsOneWidget);
 
-        // Collapse detail checklist
+        // Collapse kembali detail checklist
         await tester.tap(find.byKey(const Key('evan_prep_expand_btn')));
         await tester.pump();
         expect(

@@ -7,6 +7,7 @@ import '../providers/clinic_data_provider.dart';
 import '../routing/app_router.dart';
 import '../services/notification_service.dart';
 import '../theme/sehatku_theme.dart';
+import '../widgets/clinic_prep_checklist_widget.dart';
 
 class BookingDetailScreen extends StatefulWidget {
   static const String routeName = '/booking';
@@ -324,6 +325,10 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 16),
+
+                  // Widget Interaksi setState (Tugas 6 - Evan)
+                  const ClinicPrepChecklistWidget(),
                   const SizedBox(height: 20),
 
                   // Pilih Tanggal & Sesi Jam Praktik

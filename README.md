@@ -82,6 +82,20 @@ flowchart LR
 ### Pratinjau Diagram ERD Sistem Klinik SehatKu
 ![ERD SehatKu](docs/erd/erd_sehatku_database.svg)
 
+### Cuplikan Layar Aplikasi & Pengujian (`docs/screenshots/`)
+
+| Halaman Masuk (`LoginScreen`) | Beranda (`HomeScreen`) |
+| :---: | :---: |
+| ![Login](docs/screenshots/03_login_screen.png) | ![Beranda](docs/screenshots/04_home_screen.png) |
+
+| Detail Booking & Widget `setState` | Tiket QR Antrean (`QrQueueTicketScreen`) |
+| :---: | :---: |
+| ![Booking & Widget setState](docs/screenshots/05_booking_detail_dan_widget_setstate.png) | ![QR Antrean](docs/screenshots/08_qr_queue_ticket_screen.png) |
+
+| Rekam Medis (`MedicalRecordScreen`) | Profil & Analitik Poli (`visitCountByPoli`) |
+| :---: | :---: |
+| ![Rekam Medis](docs/screenshots/06_medical_record_screen.png) | ![Profil & Rekap Poli](docs/screenshots/07_profile_screen_rekap_poli.png) |
+
 ---
 
 ## Endpoint Backend Autentikasi (`backend/`)

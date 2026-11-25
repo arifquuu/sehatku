@@ -57,14 +57,14 @@ SehatKu menggunakan skema relasional MySQL (`sehatku_db`) dengan 6 tabel (`polyc
 
 ### 3.1 Pemrograman Dart Dasar (Tugas 2)
 Tiga program Dart dasar bertema SehatKu disimpan di folder [`dart_basics/`](../dart_basics/):
-1. `01_class_inheritance_layanan.dart` — Class & inheritance (`LayananKlinik` → `LayananPoli` & `LayananLaboratorium`).
-2. `02_koleksi_daftar_poli.dart` — Koleksi `List` & `Map` untuk 6 poliklinik dan sisa kuota.
-3. `03_function_null_safety.dart` — Function & null safety (`?`, `??`, `?.`) untuk validasi NIK dan estimasi biaya.
+1. `class_inheritance_layanan.dart` — Class & inheritance (`LayananKlinik` → `LayananPoli` & `LayananLaboratorium`).
+2. `koleksi_daftar_poli.dart` — Koleksi `List` & `Map` untuk 6 poliklinik dan sisa kuota.
+3. `function_null_safety.dart` — Function & null safety (`?`, `??`, `?.`) untuk validasi NIK dan estimasi biaya.
 
 ### 3.2 Navigasi, State Management & Widget `setState` (Tugas 5, 6, 7)
 - **Routing & Auth Guard:** `AppRouter` (`lib/routing/app_router.dart`) mengatur named routes (`/login`, `/register`, `/`, `/jadwal`, `/booking`, `/rekam-medis`, `/profil`, `/async-lab`, `/qr-ticket`) dengan `AuthGate`.
 - **Global State:** `MultiProvider` (`AuthProvider` & `ClinicDataProvider`) menyinkronkan sesi pasien, booking, rekam medis, favorit, dan tema lintas halaman.
-- **Ephemeral State (`setState`):** `ClinicPrepChecklistWidget` (`lib/widgets/clinic_prep_checklist_widget.dart`) pada Beranda mengelola checklist persiapan kunjungan dan simulasi estimasi waktu tunggu secara lokal.
+- **Ephemeral State (`setState`):** `ClinicPrepChecklistWidget` (`lib/widgets/clinic_prep_checklist_widget.dart`) pada halaman Detail Dokter & Booking mengelola checklist persiapan kunjungan dan simulasi estimasi waktu tunggu secara lokal.
 
 ### 3.3 Pemrograman Asinkron, REST API, Storage Lokal & Fitur Perangkat (Tugas 8, 9, 10, 12, 14)
 - **Asinkron & Event Loop (Tugas 8):** `AsyncDemoService` & `AsyncComparisonScreen` + skrip CLI `tool/sync_vs_async_demo.dart`.
@@ -103,9 +103,16 @@ Aplikasi **SehatKu** berhasil dibangun dan diintegrasikan secara penuh oleh Kelo
 
 ---
 
-## LAMPIRAN CHECKLIST BUKTI SCREENSHOT & VIDEO (UNTUK PENGUMPULAN)
-- [ ] Screenshot `flutter doctor` & output konsol 3 program `dart_basics/`
-- [ ] Screenshot hasil `flutter test` (seluruh test lulus)
-- [ ] Screenshot aplikasi final (Login, Beranda + widget checklist, Jadwal 2 ukuran layar, Booking & QR Antrean, Rekam Medis, Profil + grafik poli, Mode Gelap)
-- [ ] Video bukti penyimpanan lokal (Tugas 10)
-- [ ] Video demo aplikasi 3–5 menit (Tugas 14)
+## LAMPIRAN BUKTI SCREENSHOT, LOG & VIDEO
+- [x] Log & screenshot `flutter doctor` + output konsol 3 program `dart_basics/`: [`docs/logs/flutter_doctor_dan_dart_basics.txt`](logs/flutter_doctor_dan_dart_basics.txt) & [`docs/screenshots/01_flutter_doctor_dan_dart_basics.png`](screenshots/01_flutter_doctor_dan_dart_basics.png)
+- [x] Log & screenshot hasil `flutter test` (`13/13 passed`): [`docs/logs/flutter_test_results.txt`](logs/flutter_test_results.txt) & [`docs/screenshots/02_hasil_flutter_test.png`](screenshots/02_hasil_flutter_test.png)
+- [x] Screenshot aplikasi berjalan (`Login`, `Beranda`, `Detail Booking & Widget setState`, `Rekam Medis`, `Profil & Grafik Poli`, `QR Antrean`): [`docs/screenshots/`](screenshots/)
+- [ ] Video bukti penyimpanan lokal (Tugas 10 — dibantu Fadjri/rekam ulang dari APK)
+- [ ] Video demo aplikasi 3–5 menit (Tugas 14 — ikuti naskah di [`docs/panduan_video_demo_sehatku.md`](panduan_video_demo_sehatku.md))
+
+### Cuplikan Layar Hasil Eksekusi & Aplikasi
+![Flutter Doctor dan Dart Basics](screenshots/01_flutter_doctor_dan_dart_basics.png)
+![Hasil Flutter Test](screenshots/02_hasil_flutter_test.png)
+![Detail Booking dan Widget setState](screenshots/05_booking_detail_dan_widget_setstate.png)
+![Profil dan Rekap Poli](screenshots/07_profile_screen_rekap_poli.png)
+![Tiket QR Antrean](screenshots/08_qr_queue_ticket_screen.png)

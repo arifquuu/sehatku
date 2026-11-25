@@ -1,5 +1,7 @@
-/// Tugas 2 (b) — Pemrograman Dart Dasar: Koleksi List & Map
-/// Tema: Daftar Poliklinik, Kode Antrean, Kuota Harian, dan Rekap Kunjungan SehatKu
+// Tugas 2 (b) — Pemrograman Dart Dasar: Koleksi List & Map
+// Tema: Daftar Poliklinik, Kode Antrean, Kuota Harian, dan Rekap Kunjungan SehatKu
+
+import 'dart:io';
 
 void main() {
   // List berisi Map data 6 poliklinik utama Klinik SehatKu
@@ -51,7 +53,7 @@ void main() {
   // Map untuk merekap sisa kuota per kode poli
   final Map<String, int> sisaKuotaPerPoli = {};
 
-  print('=== DAFTAR POLIKLINIK SEHATKU ===');
+  stdout.writeln('=== DAFTAR POLIKLINIK SEHATKU ===');
   for (final poli in daftarPoli) {
     final kode = poli['kode'] as String;
     final nama = poli['nama'] as String;
@@ -61,7 +63,7 @@ void main() {
     final sisa = kuota - terisi;
 
     sisaKuotaPerPoli[nama] = sisa;
-    print('[$kode] $nama | Terisi: $terisi/$kuota (Sisa: $sisa) | Rp$tarif');
+    stdout.writeln('[$kode] $nama | Terisi: $terisi/$kuota (Sisa: $sisa) | Rp$tarif');
   }
 
   // Filter poli yang masih memiliki sisa kuota >= 5
@@ -70,10 +72,10 @@ void main() {
     return sisa >= 5;
   }).toList();
 
-  print('\nPoli dengan sisa kuota >= 5 pasien:');
+  stdout.writeln('\nPoli dengan sisa kuota >= 5 pasien:');
   for (final p in poliLega) {
-    print('- ${p['nama']} (Kode ${p['kode']})');
+    stdout.writeln('- ${p['nama']} (Kode ${p['kode']})');
   }
 
-  print('\nRekap Map Sisa Kuota: $sisaKuotaPerPoli');
+  stdout.writeln('\nRekap Map Sisa Kuota: $sisaKuotaPerPoli');
 }

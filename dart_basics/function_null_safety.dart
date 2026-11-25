@@ -1,5 +1,7 @@
-/// Tugas 2 (c) — Pemrograman Dart Dasar: Function & Null Safety
-/// Tema: Validasi Data Pasien, Format Antrean, & Estimasi Biaya Kunjungan SehatKu
+// Tugas 2 (c) — Pemrograman Dart Dasar: Function & Null Safety
+// Tema: Validasi Data Pasien, Format Antrean, & Estimasi Biaya Kunjungan SehatKu
+
+import 'dart:io';
 
 String formatNomorAntrean({
   required String kodePoli,
@@ -41,25 +43,25 @@ int hitungEstimasiBiaya({
 }
 
 void main() {
-  print('=== SIMULASI FUNCTION & NULL SAFETY SEHATKU ===');
+  stdout.writeln('=== SIMULASI FUNCTION & NULL SAFETY SEHATKU ===');
 
   const nikValid = '6171031504040001';
   const String? nikKosong = null;
 
-  print('Cek NIK "$nikValid": ${isNikValid(nikValid) ? "Valid" : "Tidak Valid"}');
-  print('Cek NIK null: ${isNikValid(nikKosong) ? "Valid" : "Tidak Valid"}');
+  stdout.writeln('Cek NIK "$nikValid": ${isNikValid(nikValid) ? "Valid" : "Tidak Valid"}');
+  stdout.writeln('Cek NIK null: ${isNikValid(nikKosong) ? "Valid" : "Tidak Valid"}');
 
   final nomorAntrean = formatNomorAntrean(kodePoli: 'a', nomorUrut: 7);
-  print('Nomor Antrean Terbit: $nomorAntrean');
+  stdout.writeln('Nomor Antrean Terbit: $nomorAntrean');
 
-  print(
+  stdout.writeln(
     ringkasanPenjamin(
       namaPasien: 'Evan',
       nomorBpjs: '0001849201102',
       keluhanUtama: 'Demam ringan sejak kemarin malam',
     ),
   );
-  print(
+  stdout.writeln(
     ringkasanPenjamin(
       namaPasien: 'Pasien Tamu',
       nomorBpjs: null,
@@ -75,5 +77,5 @@ void main() {
     tarifKonsultasi: 85000,
     pakaiBpjs: true,
   );
-  print('Estimasi Biaya Umum: Rp$totalUmum | Estimasi Biaya BPJS: Rp$totalBpjs');
+  stdout.writeln('Estimasi Biaya Umum: Rp$totalUmum | Estimasi Biaya BPJS: Rp$totalBpjs');
 }

@@ -1,0 +1,59 @@
+=== flutter doctor ===
+Doctor summary (to see all details, run flutter doctor -v):
+[v] Flutter (Channel stable, 3.50.1, on Microsoft Windows [Version 10.0.26200.9711], locale en-ID)
+[v] Windows Version (Windows 11 or higher, 25H2, 2009)
+[X] Android toolchain - develop for Android devices
+    X Unable to locate Android SDK.
+      Install Android Studio from: https://developer.android.com/studio/index.html
+      On first launch it will assist you in installing the Android SDK components.
+      (or visit https://flutter.dev/to/windows-android-setup for detailed instructions).
+      If the Android SDK has been installed to a custom location, please use
+      `flutter config --android-sdk` to update to that location.
+
+[v] Chrome - develop for the web
+[!] Visual Studio - develop Windows apps (Visual Studio Community 2022 17.14.27 (February 2026))
+    X Visual Studio is missing necessary components. Please re-run the Visual Studio installer for the "Desktop development with C++" workload, and include these components:
+        MSVC v142 - VS 2019 C++ x64/x86 build tools
+         - If there are multiple build tool versions available, install the latest
+        C++ CMake tools for Windows
+        Windows 10 SDK
+[v] Connected device (2 available)
+[v] Network resources
+
+! Doctor found issues in 2 categories.
+
+=== dart run dart_basics/class_inheritance_layanan.dart ===
+=== DAFTAR LAYANAN KLINIK SEHATKU ===
+- [A] Poli Umum — Tarif Dasar: Rp50000 | Dokter: dr. Andi Pratama (Ruang 101, Kuota: 30)
+  Biaya Umum: Rp50000 | Biaya BPJS: Rp0
+- [B] Poli Gigi & Mulut — Tarif Dasar: Rp120000 | Dokter: drg. Ratna Sari (Ruang 104, Kuota: 20)
+  Biaya Umum: Rp120000 | Biaya BPJS: Rp0
+- [LAB-01] Cek Gula Darah & Kolesterol — Tarif Dasar: Rp95000 | Hasil: 45 menit (Wajib Puasa 8 Jam)
+  Biaya Umum: Rp95000 | Biaya BPJS: Rp0
+
+=== dart run dart_basics/koleksi_daftar_poli.dart ===
+=== DAFTAR POLIKLINIK SEHATKU ===
+[A] Poli Umum | Terisi: 24/30 (Sisa: 6) | Rp50000
+[B] Poli Gigi & Mulut | Terisi: 15/20 (Sisa: 5) | Rp120000
+[C] Poli Anak | Terisi: 21/25 (Sisa: 4) | Rp85000
+[D] Poli KIA & Kandungan | Terisi: 12/18 (Sisa: 6) | Rp110000
+[E] Poli Penyakit Dalam | Terisi: 14/16 (Sisa: 2) | Rp130000
+[F] Poli Mata & THT | Terisi: 9/15 (Sisa: 6) | Rp115000
+
+Poli dengan sisa kuota >= 5 pasien:
+- Poli Umum (Kode A)
+- Poli Gigi & Mulut (Kode B)
+- Poli KIA & Kandungan (Kode D)
+- Poli Mata & THT (Kode F)
+
+Rekap Map Sisa Kuota: {Poli Umum: 6, Poli Gigi & Mulut: 5, Poli Anak: 4, Poli KIA & Kandungan: 6, Poli Penyakit Dalam: 2, Poli Mata & THT: 6}
+
+=== dart run dart_basics/function_null_safety.dart ===
+=== SIMULASI FUNCTION & NULL SAFETY SEHATKU ===
+Cek NIK "6171031504040001": Valid
+Cek NIK null: Tidak Valid
+Nomor Antrean Terbit: A-007
+Pasien: Evan | Penjamin: BPJS (0001849201102) | Keluhan: Demam ringan sejak kemarin malam
+Pasien: Pasien Tamu | Penjamin: Pasien Umum | Keluhan: Belum diisi
+Estimasi Biaya Umum: Rp95000 | Estimasi Biaya BPJS: Rp0
+

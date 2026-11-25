@@ -1,5 +1,7 @@
-/// Tugas 2 (a) — Pemrograman Dart Dasar: Class & Inheritance
-/// Tema: Layanan Klinik SehatKu (LayananKlinik -> LayananPoli & LayananPenunjang)
+// Tugas 2 (a) — Pemrograman Dart Dasar: Class & Inheritance
+// Tema: Layanan Klinik SehatKu (LayananKlinik -> LayananPoli & LayananLaboratorium)
+
+import 'dart:io';
 
 class LayananKlinik {
   final String kode;
@@ -89,10 +91,10 @@ void main() {
 
   final daftarLayanan = <LayananKlinik>[poliUmum, poliGigi, cekDarah];
 
-  print('=== DAFTAR LAYANAN KLINIK SEHATKU ===');
+  stdout.writeln('=== DAFTAR LAYANAN KLINIK SEHATKU ===');
   for (final layanan in daftarLayanan) {
-    print('- ${layanan.deskripsiSingkat()}');
-    print(
+    stdout.writeln('- ${layanan.deskripsiSingkat()}');
+    stdout.writeln(
       '  Biaya Umum: Rp${layanan.hitungBiaya()} | Biaya BPJS: Rp${layanan.hitungBiaya(pakaiBpjs: true)}',
     );
   }
