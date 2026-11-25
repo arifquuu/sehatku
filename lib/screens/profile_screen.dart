@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/doctor_model.dart';
+import '../providers/auth_provider.dart';
 import '../providers/clinic_data_provider.dart';
+import '../routing/app_router.dart';
 import '../theme/sehatku_theme.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -90,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () async {
-              await provider.updatePatientProfile({
+              final updated = {
                 ...current,
                 'name': nameCtrl.text.trim(),
                 'nik': nikCtrl.text.trim(),
@@ -98,7 +100,11 @@ class ProfileScreen extends StatelessWidget {
                 'allergies': allergyCtrl.text.trim(),
                 'bpjsNumber': bpjsCtrl.text.trim(),
                 'phone': phoneCtrl.text.trim(),
-              });
+              };
+              await provider.updatePatientProfile(updated);
+              if (context.mounted) {
+                context.read<AuthProvider?>()?.syncLocalProfileChanges(updated);
+              }
               if (ctx.mounted) Navigator.of(ctx).pop();
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -118,6 +124,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<ClinicDataProvider>();
+    final auth = context.watch<AuthProvider?>();
     final profile = provider.patientProfile;
     final favDoctors = provider.favoriteDoctors;
     final poliCounts = provider.visitCountByPoli;
@@ -377,6 +384,59 @@ class ProfileScreen extends StatelessWidget {
                   ),
           ),
         ),
+        const SizedBox(height: 20),
+
+        if (auth != null && auth.isAuthenticated) ...[
+          Text(
+            'Sesi Akun & Keamanan',
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 8),
+          Card(
+            child: ListTile(
+              leading: Icon(
+                auth.isOfflineSession
+                    ? Icons.offline_bolt_outlined
+                    : Icons.verified_user_outlined,
+                color: auth.isOfflineSession
+                    ? SehatKuColors.accentAmber
+                    : SehatKuColors.success,
+              ),
+              title: Text(
+                auth.currentUser?.email ?? '-',
+                style: const TextStyle(fontWeight: FontWeight.w700),
+              ),
+              subtitle: Text(
+                auth.isOfflineSession
+                    ? 'Aktif pada mode demo lokal (tanpa koneksi MySQL)'
+                    : 'Terverifikasi melalui server PHP + MySQL (${auth.serverBaseUrl})',
+              ),
+              trailing: TextButton.icon(
+                key: const Key('profile_logout_button'),
+                onPressed: () async {
+                  await auth.logout();
+                  if (!context.mounted) return;
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRouter.login,
+                    (_) => false,
+                  );
+                },
+                icon: const Icon(
+                  Icons.logout_rounded,
+                  size: 18,
+                  color: SehatKuColors.danger,
+                ),
+                label: const Text(
+                  'Keluar',
+                  style: TextStyle(color: SehatKuColors.danger),
+                ),
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }

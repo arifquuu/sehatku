@@ -36,13 +36,12 @@ class AuthService {
   }
 
   final http.Client _client;
-  final Duration _timeout;
+  final Duration timeout;
 
   AuthService({
     http.Client? client,
-    Duration timeout = const Duration(seconds: 8),
-  }) : _client = client ?? http.Client(),
-       _timeout = timeout;
+    this.timeout = const Duration(seconds: 8),
+  }) : _client = client ?? http.Client();
 
   String _normalizeBaseUrl(String rawUrl) {
     final trimmed = rawUrl.trim();
@@ -65,7 +64,7 @@ class AuthService {
     try {
       final response = await _client
           .get(uri, headers: const {'Accept': 'application/json'})
-          .timeout(_timeout);
+          .timeout(timeout);
       return response.statusCode == 200;
     } catch (_) {
       return false;
@@ -91,7 +90,7 @@ class AuthService {
               'password': password,
             }),
           )
-          .timeout(_timeout);
+          .timeout(timeout);
 
       final data = _decodeJsonObject(response.body);
       if (response.statusCode != 200 || data['success'] != true) {
@@ -153,7 +152,7 @@ class AuthService {
               'bpjs_number': bpjsNumber.trim(),
             }),
           )
-          .timeout(_timeout);
+          .timeout(timeout);
 
       final data = _decodeJsonObject(response.body);
       if ((response.statusCode != 200 && response.statusCode != 201) ||
@@ -196,7 +195,7 @@ class AuthService {
               'Authorization': 'Bearer $token',
             },
           )
-          .timeout(_timeout);
+          .timeout(timeout);
 
       final data = _decodeJsonObject(response.body);
       if (response.statusCode != 200 || data['success'] != true) {

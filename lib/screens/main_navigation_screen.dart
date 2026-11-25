@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/doctor_model.dart';
+import '../providers/auth_provider.dart';
 import '../providers/clinic_data_provider.dart';
+import '../routing/app_router.dart';
 import '../theme/sehatku_theme.dart';
 import 'booking_detail_screen.dart';
 import 'doctor_schedule_screen.dart';
@@ -46,9 +48,48 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     );
   }
 
+  Future<void> _confirmLogout(BuildContext context) async {
+    final auth = context.read<AuthProvider?>();
+    if (auth == null) return;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Keluar dari SehatKu?'),
+        content: const Text(
+          'Sesi login Anda akan diakhiri dan Anda akan diarahkan kembali ke halaman Masuk.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: const Text('Batal'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: SehatKuColors.danger,
+            ),
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: const Text('Keluar'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true && context.mounted) {
+      await auth.logout();
+      if (!context.mounted) return;
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppRouter.login,
+        (_) => false,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<ClinicDataProvider>();
+    final auth = context.watch<AuthProvider?>();
 
     final pages = [
       HomeScreen(
@@ -113,6 +154,18 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                         fontSize: 13,
                       ),
                     ),
+                    if (auth?.currentUser != null) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        auth!.isOfflineSession
+                            ? '${auth.currentUser!.email} (Mode Lokal)'
+                            : auth.currentUser!.email,
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 11.5,
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -153,11 +206,32 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 },
               ),
               const Spacer(),
+              if (auth != null && auth.isAuthenticated) ...[
+                const Divider(height: 1),
+                ListTile(
+                  key: const Key('drawer_logout_tile'),
+                  leading: const Icon(
+                    Icons.logout_rounded,
+                    color: SehatKuColors.danger,
+                  ),
+                  title: const Text(
+                    'Keluar Akun',
+                    style: TextStyle(
+                      color: SehatKuColors.danger,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _confirmLogout(context);
+                  },
+                ),
+              ],
               const Divider(height: 1),
               const Padding(
                 padding: EdgeInsets.all(14),
                 child: Text(
-                  'Kelompok 4 — SehatKu\nProdi Sistem Informasi FMIPA UNTAN',
+                  'Kelompok 4 - SehatKu\nProdi Sistem Informasi FMIPA UNTAN',
                   style: TextStyle(fontSize: 11.5, color: Color(0xFF64748B)),
                 ),
               ),
