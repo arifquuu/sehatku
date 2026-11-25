@@ -1,0 +1,256 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1260" height="780" viewBox="0 0 1260 780" font-family="Segoe UI, Inter, Arial, sans-serif">
+  <defs>
+    <style>
+      .bg { fill: #F8FAFC; }
+      .title { font-size: 22px; font-weight: 700; fill: #0F172A; }
+      .subtitle { font-size: 13px; fill: #475569; }
+      .phone { fill: #FFFFFF; stroke: #334155; stroke-width: 2.5; rx: 28; }
+      .appbar { fill: #0D9488; }
+      .appbar-text { font-size: 14px; font-weight: 700; fill: #FFFFFF; }
+      .card { fill: #FFFFFF; stroke: #CBD5E1; stroke-width: 1.5; rx: 12; }
+      .banner { fill: #CCFBF1; stroke: #0D9488; stroke-width: 1.5; stroke-dasharray: 5,3; rx: 14; }
+      .input { fill: #F1F5F9; stroke: #94A3B8; stroke-width: 1.2; rx: 10; }
+      .chip-active { fill: #0D9488; rx: 14; }
+      .chip { fill: #E2E8F0; rx: 14; }
+      .btn { fill: #0D9488; rx: 10; }
+      .btn-outline { fill: #F0FDFA; stroke: #0D9488; stroke-width: 1.2; rx: 8; }
+      .nav { fill: #F8FAFC; stroke: #CBD5E1; stroke-width: 1.5; }
+      .label-bold { font-size: 12px; font-weight: 700; fill: #1E293B; }
+      .label { font-size: 11px; fill: #475569; }
+      .label-sm { font-size: 10px; fill: #64748B; }
+      .label-white { font-size: 11px; font-weight: 700; fill: #FFFFFF; }
+      .label-teal { font-size: 10px; font-weight: 700; fill: #0F766E; }
+      .badge { fill: #FEF3C7; stroke: #D97706; stroke-width: 1; rx: 8; }
+      .arrow { stroke: #0D9488; stroke-width: 2.2; fill: none; marker-end: url(#arrowhead); stroke-dasharray: 6,4; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0D9488" />
+    </marker>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1260" height="780" class="bg" />
+  <text x="630" y="38" text-anchor="middle" class="title">WIREFRAME 3 LAYAR UTAMA — APLIKASI KLINIK SEHATKU (KELOMPOK 4)</text>
+  <text x="630" y="60" text-anchor="middle" class="subtitle">Tugas 1 (Desain UI/UX) • Fadjri • Beranda &amp; Jadwal Dokter | Detail &amp; Form Booking | Riwayat Rekam Medis</text>
+
+  <!-- ========================================================= -->
+  <!-- LAYAR 1: BERANDA & JADWAL DOKTER                          -->
+  <!-- ========================================================= -->
+  <g transform="translate(55, 85)">
+    <text x="170" y="18" text-anchor="middle" class="label-bold" font-size="14">1. Beranda &amp; Jadwal Dokter</text>
+    <rect x="0" y="30" width="340" height="620" rx="28" class="phone" />
+
+    <!-- Status Bar & AppBar -->
+    <path d="M2 58 Q2 32 28 32 L312 32 Q338 32 338 58 L338 92 L2 92 Z" class="appbar" />
+    <text x="20" y="52" font-size="10" fill="#CCFBF1">09:41</text>
+    <text x="20" y="76" class="appbar-text">SehatKu Klinik</text>
+    <circle cx="308" cy="70" r="13" fill="#0F766E" />
+    <text x="308" y="74" text-anchor="middle" class="label-white">🔔</text>
+
+    <!-- Hero Stack Banner Antrean -->
+    <rect x="16" y="104" width="308" height="82" rx="14" class="banner" />
+    <text x="28" y="125" class="label-teal">STATUS ANTREAN AKTIF (STACK BANNER)</text>
+    <text x="28" y="145" class="label-bold">No. Antrean: A-012 • Poli Umum</text>
+    <text x="28" y="162" class="label">dr. Andi Pratama, Sp.PD • 09:00 WIB</text>
+    <rect x="236" y="132" width="76" height="28" rx="8" class="btn" />
+    <text x="274" y="150" text-anchor="middle" class="label-white">Tiket QR</text>
+
+    <!-- Search TextField -->
+    <rect x="16" y="198" width="308" height="38" rx="10" class="input" />
+    <text x="30" y="221" class="label">🔍 Cari dokter, spesialis, atau poli...</text>
+
+    <!-- Poli Filter Chips -->
+    <rect x="16" y="246" width="64" height="26" rx="13" class="chip-active" />
+    <text x="48" y="263" text-anchor="middle" class="label-white">Semua</text>
+    <rect x="86" y="246" width="74" height="26" rx="13" class="chip" />
+    <text x="123" y="263" text-anchor="middle" class="label">Poli Umum</text>
+    <rect x="166" y="246" width="68" height="26" rx="13" class="chip" />
+    <text x="200" y="263" text-anchor="middle" class="label">Poli Gigi</text>
+    <rect x="240" y="246" width="84" height="26" rx="13" class="chip" />
+    <text x="282" y="263" text-anchor="middle" class="label">Poli Anak</text>
+
+    <!-- Section Title -->
+    <text x="18" y="294" class="label-bold">Daftar Dokter &amp; Jadwal Praktik (API / Lokal)</text>
+
+    <!-- Doctor Card 1 -->
+    <rect x="16" y="304" width="308" height="88" rx="12" class="card" />
+    <rect x="26" y="316" width="56" height="64" rx="10" fill="#E2E8F0" stroke="#94A3B8" />
+    <text x="54" y="352" text-anchor="middle" class="label-sm">[Foto]</text>
+    <text x="92" y="328" class="label-bold">dr. Siti Rahmawati, Sp.A</text>
+    <text x="92" y="344" class="label-teal">Poli Anak • Ruang R-102</text>
+    <text x="92" y="360" class="label-sm">🕒 Senin, Rabu, Jumat (08:00 - 12:00)</text>
+    <text x="92" y="376" class="label-sm">⭐ 4.9 • Sisa Kuota: 8 Pasien</text>
+    <rect x="252" y="354" width="62" height="26" rx="8" class="btn" />
+    <text x="283" y="371" text-anchor="middle" class="label-white">Booking</text>
+
+    <!-- Doctor Card 2 -->
+    <rect x="16" y="402" width="308" height="88" rx="12" class="card" />
+    <rect x="26" y="414" width="56" height="64" rx="10" fill="#E2E8F0" stroke="#94A3B8" />
+    <text x="54" y="450" text-anchor="middle" class="label-sm">[Foto]</text>
+    <text x="92" y="426" class="label-bold">drg. Budi Santoso</text>
+    <text x="92" y="442" class="label-teal">Poli Gigi &amp; Mulut • Ruang R-105</text>
+    <text x="92" y="458" class="label-sm">🕒 Selasa &amp; Kamis (13:00 - 17:00)</text>
+    <text x="92" y="474" class="label-sm">⭐ 4.8 • Sisa Kuota: 5 Pasien</text>
+    <rect x="252" y="452" width="62" height="26" rx="8" class="btn" />
+    <text x="283" y="469" text-anchor="middle" class="label-white">Booking</text>
+
+    <!-- Doctor Card 3 -->
+    <rect x="16" y="500" width="308" height="82" rx="12" class="card" />
+    <rect x="26" y="512" width="56" height="58" rx="10" fill="#E2E8F0" stroke="#94A3B8" />
+    <text x="54" y="545" text-anchor="middle" class="label-sm">[Foto]</text>
+    <text x="92" y="524" class="label-bold">dr. Hendra Wijaya, Sp.PD</text>
+    <text x="92" y="540" class="label-teal">Poli Penyakit Dalam • Ruang R-201</text>
+    <text x="92" y="556" class="label-sm">🕒 Senin - Kamis (09:00 - 13:00)</text>
+    <rect x="252" y="546" width="62" height="26" rx="8" class="btn" />
+    <text x="283" y="563" text-anchor="middle" class="label-white">Booking</text>
+
+    <!-- BottomNavigationBar -->
+    <path d="M2 596 L338 596 L338 622 Q338 648 312 648 L28 648 Q2 648 2 622 Z" class="nav" />
+    <text x="46" y="620" text-anchor="middle" class="label-teal">🏠 Beranda</text>
+    <text x="128" y="620" text-anchor="middle" class="label-sm">📅 Jadwal</text>
+    <text x="214" y="620" text-anchor="middle" class="label-sm">📋 Rekam Medis</text>
+    <text x="296" y="620" text-anchor="middle" class="label-sm">👤 Profil</text>
+  </g>
+
+  <!-- ========================================================= -->
+  <!-- LAYAR 2: DETAIL DOKTER & FORM BOOKING ONLINE              -->
+  <!-- ========================================================= -->
+  <g transform="translate(460, 85)">
+    <text x="170" y="18" text-anchor="middle" class="label-bold" font-size="14">2. Detail Dokter &amp; Form Booking</text>
+    <rect x="0" y="30" width="340" height="620" rx="28" class="phone" />
+
+    <!-- AppBar -->
+    <path d="M2 58 Q2 32 28 32 L312 32 Q338 32 338 58 L338 92 L2 92 Z" class="appbar" />
+    <text x="20" y="75" class="appbar-text">← Detail &amp; Booking Jadwal</text>
+    <text x="308" y="75" text-anchor="middle" class="appbar-text">♥</text>
+
+    <!-- Doctor Summary Header Card -->
+    <rect x="16" y="104" width="308" height="96" rx="12" class="card" />
+    <rect x="28" y="116" width="64" height="72" rx="12" fill="#CCFBF1" stroke="#0D9488" />
+    <text x="60" y="156" text-anchor="middle" class="label-teal">[Avatar]</text>
+    <text x="104" y="128" class="label-bold">dr. Siti Rahmawati, Sp.A</text>
+    <text x="104" y="144" class="label-teal">Spesialis Anak • Poli Anak</text>
+    <text x="104" y="160" class="label-sm">STR: 31.2.1.401.2.21.098212</text>
+    <text x="104" y="176" class="label-sm">Biaya: Rp 75.000 / Gratis BPJS</text>
+    <text x="104" y="191" class="label-sm">Pengalaman: 9 Tahun • ⭐ 4.9</text>
+
+    <!-- Date & Session Picker -->
+    <text x="18" y="220" class="label-bold">Pilih Tanggal &amp; Sesi Jam Praktik</text>
+    <rect x="16" y="228" width="308" height="36" rx="10" class="input" />
+    <text x="28" y="250" class="label">📅 Rabu, 27 November 2026</text>
+    <text x="306" y="250" text-anchor="end" class="label-teal">Ubah</text>
+
+    <rect x="16" y="272" width="96" height="30" rx="8" class="chip-active" />
+    <text x="64" y="291" text-anchor="middle" class="label-white">08:00 - 09:30</text>
+    <rect x="122" y="272" width="96" height="30" rx="8" class="btn-outline" />
+    <text x="170" y="291" text-anchor="middle" class="label-teal">09:30 - 11:00</text>
+    <rect x="228" y="272" width="96" height="30" rx="8" class="btn-outline" />
+    <text x="276" y="291" text-anchor="middle" class="label-teal">11:00 - 12:00</text>
+
+    <!-- Patient Form Fields -->
+    <text x="18" y="324" class="label-bold">Form Pendaftaran Pasien</text>
+
+    <rect x="16" y="332" width="308" height="36" rx="8" class="input" />
+    <text x="28" y="354" class="label">👤 Nama Lengkap Pasien</text>
+
+    <rect x="16" y="376" width="308" height="36" rx="8" class="input" />
+    <text x="28" y="398" class="label">🪪 NIK / Nomor Rekam Medis (16 Digit)</text>
+
+    <!-- Payment Type Toggle -->
+    <text x="18" y="430" class="label-bold">Jenis Penjamin Layanan</text>
+    <rect x="16" y="438" width="148" height="32" rx="8" class="chip-active" />
+    <text x="90" y="458" text-anchor="middle" class="label-white">✓ BPJS Kesehatan</text>
+    <rect x="176" y="438" width="148" height="32" rx="8" class="btn-outline" />
+    <text x="250" y="458" text-anchor="middle" class="label-teal">Pasien Umum</text>
+
+    <!-- Chief Complaint -->
+    <rect x="16" y="480" width="308" height="66" rx="8" class="input" />
+    <text x="28" y="502" class="label">📝 Keluhan Utama / Gejala Pasien...</text>
+    <text x="28" y="520" class="label-sm">(Mis: Demam 2 hari, batuk ringan, kontrol imunisasi)</text>
+
+    <!-- Primary Submit CTA -->
+    <rect x="16" y="562" width="308" height="44" rx="12" class="btn" />
+    <text x="170" y="589" text-anchor="middle" class="appbar-text">Konfirmasi Booking &amp; Ambil Antrean</text>
+
+    <text x="170" y="628" text-anchor="middle" class="label-sm">Data tersimpan ke SQLite &amp; disinkronkan ke Jadwal</text>
+  </g>
+
+  <!-- ========================================================= -->
+  <!-- LAYAR 3: RIWAYAT REKAM MEDIS RINGKAS (SQLITE CRUD)        -->
+  <!-- ========================================================= -->
+  <g transform="translate(865, 85)">
+    <text x="170" y="18" text-anchor="middle" class="label-bold" font-size="14">3. Riwayat Rekam Medis (SQLite)</text>
+    <rect x="0" y="30" width="340" height="620" rx="28" class="phone" />
+
+    <!-- AppBar -->
+    <path d="M2 58 Q2 32 28 32 L312 32 Q338 32 338 58 L338 92 L2 92 Z" class="appbar" />
+    <text x="20" y="76" class="appbar-text">Rekam Medis Pasien</text>
+    <rect x="242" y="56" width="82" height="26" rx="8" fill="#0F766E" />
+    <text x="283" y="73" text-anchor="middle" class="label-white">+ Catatan</text>
+
+    <!-- Summary Stats Row -->
+    <rect x="16" y="104" width="96" height="58" rx="10" class="banner" />
+    <text x="64" y="126" text-anchor="middle" class="label-bold">14</text>
+    <text x="64" y="146" text-anchor="middle" class="label-sm">Total Kunjungan</text>
+
+    <rect x="122" y="104" width="96" height="58" rx="10" class="banner" />
+    <text x="170" y="126" text-anchor="middle" class="label-bold">3 Poli</text>
+    <text x="170" y="146" text-anchor="middle" class="label-sm">Riwayat Layanan</text>
+
+    <rect x="228" y="104" width="96" height="58" rx="10" class="banner" />
+    <text x="276" y="126" text-anchor="middle" class="label-bold">02 Des</text>
+    <text x="276" y="146" text-anchor="middle" class="label-sm">Jadwal Kontrol</text>
+
+    <!-- Search / Filter Poli -->
+    <rect x="16" y="172" width="308" height="34" rx="8" class="input" />
+    <text x="28" y="193" class="label">🔍 Filter diagnosis, dokter, atau poli...</text>
+
+    <!-- Medical Record Card 1 -->
+    <rect x="16" y="218" width="308" height="122" rx="12" class="card" />
+    <rect x="28" y="228" width="86" height="20" rx="6" class="badge" />
+    <text x="71" y="242" text-anchor="middle" font-size="9" font-weight="700" fill="#B45309">20 Nov 2026</text>
+    <text x="122" y="242" class="label-teal">Poli Penyakit Dalam</text>
+    <text x="28" y="264" class="label-bold">Diagnosis: Gastritis Akut (Dispepsia)</text>
+    <text x="28" y="280" class="label">Dokter: dr. Hendra Wijaya, Sp.PD</text>
+    <text x="28" y="296" class="label-sm">💊 Resep: Omeprazole 20mg (2x1), Antasida</text>
+    <text x="28" y="312" class="label-sm">📌 Kontrol Ulang: 02 Des 2026 • TD: 120/80</text>
+    <text x="242" y="330" class="label-teal">[Edit]   [Hapus]</text>
+
+    <!-- Medical Record Card 2 -->
+    <rect x="16" y="350" width="308" height="116" rx="12" class="card" />
+    <rect x="28" y="360" width="86" height="20" rx="6" class="badge" />
+    <text x="71" y="374" text-anchor="middle" font-size="9" font-weight="700" fill="#B45309">04 Okt 2026</text>
+    <text x="122" y="374" class="label-teal">Poli Gigi &amp; Mulut</text>
+    <text x="28" y="396" class="label-bold">Diagnosis: Scaling &amp; Karies Molar 1</text>
+    <text x="28" y="412" class="label">Dokter: drg. Budi Santoso</text>
+    <text x="28" y="428" class="label-sm">💊 Tindakan: Pembersihan karang &amp; tambal komposit</text>
+    <text x="28" y="444" class="label-sm">📌 Kontrol Ulang: 04 Apr 2027 • TD: 118/78</text>
+    <text x="242" y="458" class="label-teal">[Edit]   [Hapus]</text>
+
+    <!-- Medical Record Card 3 -->
+    <rect x="16" y="476" width="308" height="106" rx="12" class="card" />
+    <rect x="28" y="486" width="86" height="20" rx="6" class="badge" />
+    <text x="71" y="500" text-anchor="middle" font-size="9" font-weight="700" fill="#B45309">12 Agu 2026</text>
+    <text x="122" y="500" class="label-teal">Poli Umum</text>
+    <text x="28" y="522" class="label-bold">Diagnosis: ISPA Ringan &amp; Observasi Febris</text>
+    <text x="28" y="538" class="label">Dokter: dr. Rina Kartika</text>
+    <text x="28" y="554" class="label-sm">💊 Resep: Paracetamol 500mg, Vitamin C</text>
+    <text x="242" y="572" class="label-teal">[Edit]   [Hapus]</text>
+
+    <!-- BottomNavigationBar -->
+    <path d="M2 596 L338 596 L338 622 Q338 648 312 648 L28 648 Q2 648 2 622 Z" class="nav" />
+    <text x="46" y="620" text-anchor="middle" class="label-sm">🏠 Beranda</text>
+    <text x="128" y="620" text-anchor="middle" class="label-sm">📅 Jadwal</text>
+    <text x="214" y="620" text-anchor="middle" class="label-teal">📋 Rekam Medis</text>
+    <text x="296" y="620" text-anchor="middle" class="label-sm">👤 Profil</text>
+  </g>
+
+  <!-- Navigation Flow Arrows between Screens -->
+  <path d="M398 455 L455 455" class="arrow" />
+  <text x="426" y="445" text-anchor="middle" class="label-teal">Navigator.push</text>
+  <text x="426" y="472" text-anchor="middle" class="label-sm">(Data Dokter)</text>
+
+  <path d="M803 668 L860 668" class="arrow" />
+  <text x="831" y="658" text-anchor="middle" class="label-teal">Simpan SQLite</text>
+  <text x="831" y="684" text-anchor="middle" class="label-sm">(Riwayat/Booking)</text>
+</svg>
