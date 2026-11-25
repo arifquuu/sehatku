@@ -5,6 +5,7 @@ import '../models/booking_model.dart';
 import '../models/doctor_model.dart';
 import '../models/health_article_model.dart';
 import '../models/medical_record_model.dart';
+import '../models/user_model.dart';
 import '../services/api_service.dart';
 import '../services/database_helper.dart';
 import '../services/local_storage_service.dart';
@@ -297,6 +298,18 @@ class ClinicDataProvider extends ChangeNotifier {
 
   Future<void> updatePatientProfile(Map<String, String> updated) async {
     _patientProfile = Map<String, String>.from(updated);
+    await _localStorageService.savePatientProfile(_patientProfile);
+    notifyListeners();
+  }
+
+  Future<void> applyAuthenticatedUser(AppUser user) async {
+    final mapped = user.toClinicProfileMap();
+    final changed = mapped.entries.any(
+      (entry) => _patientProfile[entry.key] != entry.value,
+    );
+    if (!changed) return;
+    _patientProfile = mapped;
+    await _localStorageService.init();
     await _localStorageService.savePatientProfile(_patientProfile);
     notifyListeners();
   }

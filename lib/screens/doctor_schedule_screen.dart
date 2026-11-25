@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../data/dummy_clinic_data.dart';
 import '../models/doctor_model.dart';
 import '../providers/clinic_data_provider.dart';
+import '../routing/app_router.dart';
 import '../theme/sehatku_theme.dart';
 import '../widgets/doctor_card.dart';
 
@@ -440,9 +441,26 @@ class _DoctorScheduleScreenState extends State<DoctorScheduleScreen> {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 const Divider(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Wrap(
+                  alignment: WrapAlignment.end,
+                  spacing: 4,
+                  runSpacing: 4,
                   children: [
+                    TextButton.icon(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRouter.qrTicket,
+                          arguments: item,
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.qr_code_2_rounded,
+                        size: 17,
+                        color: SehatKuColors.primary,
+                      ),
+                      label: const Text('QR Antrean'),
+                    ),
                     if (isScheduled && item.id != null) ...[
                       TextButton.icon(
                         onPressed: () => provider.updateBookingStatus(

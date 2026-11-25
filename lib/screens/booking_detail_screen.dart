@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../models/doctor_model.dart';
 import '../providers/clinic_data_provider.dart';
+import '../routing/app_router.dart';
+import '../services/notification_service.dart';
 import '../theme/sehatku_theme.dart';
 
 class BookingDetailScreen extends StatefulWidget {
@@ -95,6 +97,10 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
       complaint: _complaintController.text.trim(),
     );
 
+    if (provider.reminderEnabled) {
+      await NotificationService.instance.showBookingNotification(created);
+    }
+
     if (!mounted) return;
     setState(() => _isSubmitting = false);
 
@@ -155,6 +161,18 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
           ],
         ),
         actions: [
+          OutlinedButton.icon(
+            onPressed: () {
+              Navigator.of(ctx).pop();
+              Navigator.pushReplacementNamed(
+                context,
+                AppRouter.qrTicket,
+                arguments: created,
+              );
+            },
+            icon: const Icon(Icons.qr_code_2_rounded, size: 18),
+            label: const Text('Lihat QR Antrean'),
+          ),
           ElevatedButton(
             onPressed: () {
               Navigator.of(ctx).pop();

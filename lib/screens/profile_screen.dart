@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import '../models/doctor_model.dart';
+import '../providers/auth_provider.dart';
 import '../providers/clinic_data_provider.dart';
+import '../routing/app_router.dart';
+import '../services/notification_service.dart';
 import '../theme/sehatku_theme.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -90,7 +94,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () async {
-              await provider.updatePatientProfile({
+              final updated = {
                 ...current,
                 'name': nameCtrl.text.trim(),
                 'nik': nikCtrl.text.trim(),
@@ -98,7 +102,11 @@ class ProfileScreen extends StatelessWidget {
                 'allergies': allergyCtrl.text.trim(),
                 'bpjsNumber': bpjsCtrl.text.trim(),
                 'phone': phoneCtrl.text.trim(),
-              });
+              };
+              await provider.updatePatientProfile(updated);
+              if (context.mounted) {
+                context.read<AuthProvider?>()?.syncLocalProfileChanges(updated);
+              }
               if (ctx.mounted) Navigator.of(ctx).pop();
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -118,6 +126,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<ClinicDataProvider>();
+    final auth = context.watch<AuthProvider?>();
     final profile = provider.patientProfile;
     final favDoctors = provider.favoriteDoctors;
     final poliCounts = provider.visitCountByPoli;
@@ -296,7 +305,69 @@ class ProfileScreen extends StatelessWidget {
                   'Aktifkan pengingat otomatis sebelum tanggal kontrol ulang',
                 ),
                 value: provider.reminderEnabled,
-                onChanged: provider.toggleReminder,
+                onChanged: (val) async {
+                  if (val) {
+                    final perm = await NotificationService.instance
+                        .requestPermission();
+                    if (!context.mounted) return;
+                    if (!perm.granted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(perm.message),
+                          action: perm.permanentlyDenied
+                              ? const SnackBarAction(
+                                  label: 'Pengaturan',
+                                  onPressed: openAppSettings,
+                                )
+                              : null,
+                        ),
+                      );
+                      return;
+                    }
+                  } else {
+                    await NotificationService.instance.cancelAll();
+                  }
+                  await provider.toggleReminder(val);
+                },
+              ),
+              const Divider(height: 1),
+              ListTile(
+                key: const Key('test_notification_tile'),
+                leading: const Icon(Icons.notification_add_outlined),
+                title: const Text('Uji Notifikasi Pengingat Kontrol'),
+                subtitle: const Text(
+                  'Kirim pengingat lokal jadwal kontrol terdekat sekarang',
+                ),
+                trailing: TextButton(
+                  onPressed: () async {
+                    final nextControl = provider.medicalRecords.isNotEmpty
+                        ? provider.medicalRecords.first.nextControlDate
+                        : 'sesuai jadwal klinik';
+                    final res = await NotificationService.instance
+                        .scheduleControlReminder(
+                          id: 901,
+                          title: 'Pengingat Kontrol SehatKu',
+                          body:
+                              'Halo ${profile['name'] ?? 'Pasien'}, jadwal kontrol ulang terdekat Anda: $nextControl.',
+                          scheduledAt: DateTime.now().add(
+                            const Duration(seconds: 5),
+                          ),
+                        );
+                    if (!context.mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(res.message),
+                        action: res.permanentlyDenied
+                            ? const SnackBarAction(
+                                label: 'Pengaturan',
+                                onPressed: openAppSettings,
+                              )
+                            : null,
+                      ),
+                    );
+                  },
+                  child: const Text('Kirim'),
+                ),
               ),
               const Divider(height: 1),
               SwitchListTile(
@@ -343,13 +414,18 @@ class ProfileScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  entry.key,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13,
+                                Expanded(
+                                  child: Text(
+                                    entry.key,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13,
+                                    ),
                                   ),
                                 ),
+                                const SizedBox(width: 8),
                                 Text(
                                   '${entry.value} kunjungan',
                                   style: const TextStyle(
@@ -377,6 +453,59 @@ class ProfileScreen extends StatelessWidget {
                   ),
           ),
         ),
+        const SizedBox(height: 20),
+
+        if (auth != null && auth.isAuthenticated) ...[
+          Text(
+            'Sesi Akun & Keamanan',
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 8),
+          Card(
+            child: ListTile(
+              leading: Icon(
+                auth.isOfflineSession
+                    ? Icons.offline_bolt_outlined
+                    : Icons.verified_user_outlined,
+                color: auth.isOfflineSession
+                    ? SehatKuColors.accentAmber
+                    : SehatKuColors.success,
+              ),
+              title: Text(
+                auth.currentUser?.email ?? '-',
+                style: const TextStyle(fontWeight: FontWeight.w700),
+              ),
+              subtitle: Text(
+                auth.isOfflineSession
+                    ? 'Aktif pada mode demo lokal (tanpa koneksi MySQL)'
+                    : 'Terverifikasi melalui server PHP + MySQL (${auth.serverBaseUrl})',
+              ),
+              trailing: TextButton.icon(
+                key: const Key('profile_logout_button'),
+                onPressed: () async {
+                  await auth.logout();
+                  if (!context.mounted) return;
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRouter.login,
+                    (_) => false,
+                  );
+                },
+                icon: const Icon(
+                  Icons.logout_rounded,
+                  size: 18,
+                  color: SehatKuColors.danger,
+                ),
+                label: const Text(
+                  'Keluar',
+                  style: TextStyle(color: SehatKuColors.danger),
+                ),
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }
@@ -387,7 +516,7 @@ class ProfileScreen extends StatelessWidget {
       children: [
         Icon(icon, size: 16, color: SehatKuColors.primary),
         const SizedBox(width: 6),
-        Text(text, style: const TextStyle(fontSize: 12.5)),
+        Flexible(child: Text(text, style: const TextStyle(fontSize: 12.5))),
       ],
     );
   }

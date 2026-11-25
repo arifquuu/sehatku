@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'data/dummy_clinic_data.dart';
-import 'models/doctor_model.dart';
+import 'providers/auth_provider.dart';
 import 'providers/clinic_data_provider.dart';
-import 'screens/booking_detail_screen.dart';
-import 'screens/main_navigation_screen.dart';
+import 'routing/app_router.dart';
+import 'services/notification_service.dart';
 import 'theme/sehatku_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  final authProvider = AuthProvider();
+  final clinicProvider = ClinicDataProvider();
+
+  authProvider.addListener(() {
+    final user = authProvider.currentUser;
+    if (user != null) {
+      clinicProvider.applyAuthenticatedUser(user);
+    }
+  });
+
+  NotificationService.instance.initialize();
+  authProvider.restoreSession();
+  clinicProvider.initializeAll();
+
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => ClinicDataProvider()..initializeAll(),
-        ),
+        ChangeNotifierProvider<AuthProvider>.value(value: authProvider),
+        ChangeNotifierProvider<ClinicDataProvider>.value(value: clinicProvider),
       ],
       child: const SehatKuApp(),
     ),
@@ -32,31 +45,13 @@ class SehatKuApp extends StatelessWidget {
     );
 
     return MaterialApp(
-      title: 'SehatKu — Pendaftaran & Rekam Medis Klinik',
+      title: 'SehatKu - Pendaftaran dan Rekam Medis Klinik',
       debugShowCheckedModeBanner: false,
       theme: SehatKuTheme.lightTheme,
       darkTheme: SehatKuTheme.darkTheme,
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      initialRoute: '/',
-      routes: {
-        '/': (_) => const MainNavigationScreen(initialIndex: 0),
-        '/jadwal': (_) => const MainNavigationScreen(initialIndex: 1),
-        '/rekam-medis': (_) => const MainNavigationScreen(initialIndex: 2),
-        '/profil': (_) => const MainNavigationScreen(initialIndex: 3),
-      },
-      onGenerateRoute: (settings) {
-        if (settings.name == BookingDetailScreen.routeName) {
-          final arg = settings.arguments;
-          final doctor = arg is Doctor
-              ? arg
-              : DummyClinicData.localDoctors.first;
-          return MaterialPageRoute(
-            settings: settings,
-            builder: (_) => BookingDetailScreen(doctor: doctor),
-          );
-        }
-        return null;
-      },
+      initialRoute: AppRouter.home,
+      onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
 }

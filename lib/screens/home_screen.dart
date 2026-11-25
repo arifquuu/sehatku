@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../data/dummy_clinic_data.dart';
+import '../models/booking_model.dart';
 import '../models/doctor_model.dart';
 import '../providers/clinic_data_provider.dart';
+import '../routing/app_router.dart';
 import '../theme/sehatku_theme.dart';
 import '../widgets/doctor_card.dart';
 
@@ -329,7 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildActiveQueueCard(dynamic activeBooking) {
+  Widget _buildActiveQueueCard(BookingAppointment? activeBooking) {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -426,6 +428,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(width: 6),
+                IconButton.filledTonal(
+                  key: const Key('home_open_qr_button'),
+                  tooltip: 'Buka Tiket QR Antrean',
+                  style: IconButton.styleFrom(
+                    backgroundColor: SehatKuColors.primarySoft,
+                    foregroundColor: SehatKuColors.primaryDark,
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRouter.qrTicket,
+                      arguments: activeBooking,
+                    );
+                  },
+                  icon: const Icon(Icons.qr_code_2_rounded, size: 22),
                 ),
               ],
             ),

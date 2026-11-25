@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import '../data/dummy_clinic_data.dart';
 import '../models/medical_record_model.dart';
 import '../providers/clinic_data_provider.dart';
+import '../services/media_service.dart';
 import '../theme/sehatku_theme.dart';
+import '../widgets/medical_document_preview.dart';
 
 class MedicalRecordScreen extends StatefulWidget {
   const MedicalRecordScreen({super.key});
@@ -15,6 +19,7 @@ class MedicalRecordScreen extends StatefulWidget {
 
 class _MedicalRecordScreenState extends State<MedicalRecordScreen> {
   final TextEditingController _searchController = TextEditingController();
+  final MediaService _mediaService = MediaService();
   String _poliFilter = 'Semua';
 
   @override
@@ -65,6 +70,8 @@ class _MedicalRecordScreenState extends State<MedicalRecordScreen> {
     );
     final notesCtrl = TextEditingController(text: existing?.notes ?? '');
     String selectedPoli = existing?.poli ?? 'Poli Umum';
+    String? attachedPhotoPath = existing?.documentPhotoPath;
+    String? attachmentNotice;
 
     final formKey = GlobalKey<FormState>();
 
@@ -192,6 +199,129 @@ class _MedicalRecordScreenState extends State<MedicalRecordScreen> {
                         labelText: 'Catatan Tambahan Dokter',
                       ),
                     ),
+                    const SizedBox(height: 14),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Lampiran Foto Dokumen Medis (Resep / Hasil Lab)',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            key: const Key('mr_pick_gallery_button'),
+                            onPressed: () async {
+                              final result = await _mediaService
+                                  .pickMedicalDocument(ImageSource.gallery);
+                              setDialogState(() {
+                                if (result.savedPath != null) {
+                                  attachedPhotoPath = result.savedPath;
+                                  attachmentNotice = result.message;
+                                } else {
+                                  attachmentNotice = result.message;
+                                }
+                              });
+                              if (result.permanentlyDenied && ctx.mounted) {
+                                ScaffoldMessenger.of(ctx).showSnackBar(
+                                  SnackBar(
+                                    content: Text(result.message),
+                                    action: SnackBarAction(
+                                      label: 'Pengaturan',
+                                      onPressed: openAppSettings,
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                            icon: const Icon(
+                              Icons.photo_library_outlined,
+                              size: 17,
+                            ),
+                            label: const Text('Galeri'),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            key: const Key('mr_pick_camera_button'),
+                            onPressed: () async {
+                              final result = await _mediaService
+                                  .pickMedicalDocument(ImageSource.camera);
+                              setDialogState(() {
+                                if (result.savedPath != null) {
+                                  attachedPhotoPath = result.savedPath;
+                                  attachmentNotice = result.message;
+                                } else {
+                                  attachmentNotice = result.message;
+                                }
+                              });
+                              if (result.permanentlyDenied && ctx.mounted) {
+                                ScaffoldMessenger.of(ctx).showSnackBar(
+                                  SnackBar(
+                                    content: Text(result.message),
+                                    action: SnackBarAction(
+                                      label: 'Pengaturan',
+                                      onPressed: openAppSettings,
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                            icon: const Icon(
+                              Icons.camera_alt_outlined,
+                              size: 17,
+                            ),
+                            label: const Text('Kamera'),
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (attachmentNotice != null) ...[
+                      const SizedBox(height: 6),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          attachmentNotice!,
+                          style: const TextStyle(
+                            fontSize: 11.5,
+                            color: Color(0xFF475569),
+                          ),
+                        ),
+                      ),
+                    ],
+                    if (attachedPhotoPath != null) ...[
+                      const SizedBox(height: 8),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: MedicalDocumentPreview(
+                          photoPath: attachedPhotoPath!,
+                          height: 120,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton.icon(
+                          onPressed: () => setDialogState(() {
+                            attachedPhotoPath = null;
+                            attachmentNotice = 'Lampiran foto dihapus.';
+                          }),
+                          icon: const Icon(
+                            Icons.delete_outline,
+                            size: 16,
+                            color: SehatKuColors.danger,
+                          ),
+                          label: const Text(
+                            'Hapus Lampiran',
+                            style: TextStyle(color: SehatKuColors.danger),
+                          ),
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -223,6 +353,7 @@ class _MedicalRecordScreenState extends State<MedicalRecordScreen> {
                       double.tryParse(weightCtrl.text.trim()) ?? 64.0,
                   nextControlDate: nextControlCtrl.text.trim(),
                   notes: notesCtrl.text.trim(),
+                  documentPhotoPath: attachedPhotoPath,
                 );
 
                 if (existing == null) {
@@ -427,7 +558,7 @@ class _MedicalRecordScreenState extends State<MedicalRecordScreen> {
                           crossAxisCount: 2,
                           crossAxisSpacing: 14,
                           mainAxisSpacing: 14,
-                          mainAxisExtent: 252,
+                          mainAxisExtent: 286,
                         ),
                     itemBuilder: (context, index) =>
                         _buildRecordCard(context, filtered[index]),
@@ -477,6 +608,34 @@ class _MedicalRecordScreenState extends State<MedicalRecordScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Future<void> _showPhotoPreviewDialog(MedicalRecord rec) async {
+    final path = rec.documentPhotoPath;
+    if (path == null || path.isEmpty) return;
+    await showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Lampiran: ${rec.diagnosis}'),
+        content: SizedBox(
+          width: 440,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: MedicalDocumentPreview(
+              photoPath: path,
+              height: 300,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('Tutup'),
+          ),
+        ],
       ),
     );
   }
@@ -586,6 +745,18 @@ class _MedicalRecordScreenState extends State<MedicalRecordScreen> {
                 ),
               ],
             ),
+            if (rec.documentPhotoPath != null &&
+                rec.documentPhotoPath!.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: OutlinedButton.icon(
+                  onPressed: () => _showPhotoPreviewDialog(rec),
+                  icon: const Icon(Icons.image_outlined, size: 16),
+                  label: const Text('Lihat Foto Dokumen'),
+                ),
+              ),
+            ],
           ],
         ),
       ),
