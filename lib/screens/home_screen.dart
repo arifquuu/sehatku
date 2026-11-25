@@ -7,6 +7,7 @@ import '../models/doctor_model.dart';
 import '../providers/clinic_data_provider.dart';
 import '../routing/app_router.dart';
 import '../theme/sehatku_theme.dart';
+import '../widgets/clinic_prep_checklist_widget.dart';
 import '../widgets/doctor_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -218,6 +219,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
 
+                const SizedBox(height: 20),
+
+                // Widget Interaksi setState (Tugas 6 - Evan)
+                const ClinicPrepChecklistWidget(),
                 const SizedBox(height: 24),
 
                 // 7. Edukasi & Informasi Klinik dari REST API Publik (Tugas 9)
