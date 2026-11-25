@@ -1,0 +1,1256 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<title>Laporan UAS PBL — Kelompok 4 (SehatKu) | FMIPA UNTAN</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 15mm 14mm 16mm 14mm;
+    @bottom-center {
+      content: "Dokumen UAS PBL — Pengembangan Aplikasi Perangkat Bergerak (A) | Prodi Sistem Informasi FMIPA UNTAN | Semester Ganjil 2026/2027";
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 7.5pt;
+      color: #64748b;
+    }
+    @bottom-right {
+      content: "Hal. " counter(page) " / " counter(pages);
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 7.5pt;
+      color: #64748b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.42;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    font-size: 8.8pt;
+  }
+  th, td {
+    border: 1px solid #334155;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  th {
+    background: #173a5e;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: left;
+  }
+  .doc-header td { border: 1px solid #1e293b; }
+  .header-title { text-align: center; }
+  .header-title .ministry { font-size: 9pt; font-weight: 700; }
+  .header-title .univ { font-size: 11pt; font-weight: 800; }
+  .header-title .fac { font-size: 9.2pt; font-weight: 700; }
+  .header-title .addr { font-size: 7.8pt; color: #334155; margin-top: 2px; }
+  .logo-box {
+    width: 78px;
+    height: 78px;
+    border: 1.5px solid #173a5e;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    color: #173a5e;
+    font-weight: 800;
+    font-size: 8pt;
+    text-align: center;
+    line-height: 1.15;
+  }
+  .meta-label { background: #f1f5f9; font-weight: 700; }
+  .exam-banner {
+    text-align: center;
+    margin: 12px 0 10px 0;
+  }
+  .exam-banner .u1 { font-size: 12pt; font-weight: 800; text-decoration: underline; }
+  .exam-banner .u2 { font-size: 10.5pt; font-weight: 700; margin-top: 2px; }
+  .exam-banner .u3 { font-size: 10.5pt; font-weight: 700; margin-top: 2px; }
+  .section-bar {
+    background: #173a5e;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 9.8pt;
+    padding: 6px 12px;
+    border-radius: 5px;
+    margin: 14px 0 8px 0;
+    page-break-after: avoid;
+  }
+  .sub-bar {
+    border-left: 4px solid #173a5e;
+    padding-left: 8px;
+    font-weight: 700;
+    font-size: 9.5pt;
+    color: #0f172a;
+    margin: 10px 0 6px 0;
+    page-break-after: avoid;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 7.6pt;
+    font-weight: 700;
+    color: #ffffff;
+    vertical-align: middle;
+  }
+  .b-blue { background: #1d4ed8; }
+  .b-green { background: #15803d; }
+  .b-orange { background: #ea580c; }
+  .b-dark { background: #334155; }
+  .b-teal { background: #0f766e; }
+  .note-yellow {
+    background: #fefce8;
+    border: 1px dashed #ca8a04;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 8.6pt;
+    margin: 8px 0 12px 0;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .case-card {
+    border: 1px solid #cbd5e1;
+    border-top: 4px solid #ca8a04;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 8.5pt;
+    background: #ffffff;
+  }
+  .case-card.active-group {
+    border-color: #0d9488;
+    border-top: 4px solid #0d9488;
+    background: #f0fdfa;
+  }
+  .case-card h4 { margin: 0 0 4px 0; font-size: 9.5pt; color: #173a5e; }
+  .case-card ul { margin: 4px 0 0 16px; padding: 0; }
+  .task-box {
+    border: 1px solid #cbd5e1;
+    border-left: 4px solid #15803d;
+    border-radius: 6px;
+    padding: 9px 11px;
+    margin: 10px 0;
+    background: #ffffff;
+    page-break-inside: avoid;
+  }
+  .task-box.cpmk012 { border-left-color: #1d4ed8; }
+  .task-box.cpmk093 { border-left-color: #ea580c; }
+  .task-box.allow-split { page-break-inside: auto; }
+  .task-head {
+    font-weight: 700;
+    font-size: 9.8pt;
+    color: #0f172a;
+    margin-bottom: 5px;
+    page-break-after: avoid;
+  }
+  .task-q ul { margin: 4px 0 6px 18px; padding: 0; font-size: 8.8pt; }
+  .answer-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 3px solid #0d9488;
+    border-radius: 5px;
+    padding: 8px 10px;
+    margin-top: 7px;
+    font-size: 8.7pt;
+  }
+  .answer-title {
+    font-weight: 700;
+    color: #0f766e;
+    margin-bottom: 4px;
+    font-size: 8.8pt;
+  }
+  pre.code {
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 7.5pt;
+    line-height: 1.35;
+    padding: 7px 9px;
+    border-radius: 5px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    margin: 5px 0;
+  }
+  .svg-wrap {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 6px;
+    background: #ffffff;
+    margin: 6px 0;
+    text-align: center;
+  }
+  .svg-wrap svg {
+    width: 100%;
+    height: auto;
+    max-height: 360px;
+  }
+  .shot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 6px 0;
+  }
+  figure.shot {
+    margin: 6px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 5px;
+    background: #ffffff;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+  figure.shot img {
+    max-width: 100%;
+    max-height: 270px;
+    object-fit: contain;
+    border-radius: 3px;
+  }
+  figure.shot figcaption {
+    font-size: 7.7pt;
+    color: #475569;
+    margin-top: 3px;
+    font-weight: 600;
+  }
+  .sig-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+    font-size: 8.8pt;
+    page-break-inside: avoid;
+  }
+  .sig-col { width: 44%; text-align: center; }
+  .sig-space { height: 48px; }
+  .page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER DOKUMEN RESMI ==================== -->
+<table class="doc-header">
+  <tr>
+    <td rowspan="3" style="width:15%; vertical-align:middle; text-align:center;">
+      <div class="logo-box">
+        <span>UNTAN</span>
+        <span style="font-size:6.5pt;font-weight:600;">FMIPA<br/>SISFO</span>
+      </div>
+    </td>
+    <td colspan="5" class="header-title">
+      <div class="ministry">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI</div>
+      <div class="univ">UNIVERSITAS TANJUNGPURA</div>
+      <div class="fac">FAKULTAS MATEMATIKA DAN ILMU PENGETAHUAN ALAM<br/>PROGRAM STUDI SISTEM INFORMASI</div>
+      <div class="addr">JL. PROF. DR. Hadari Nawawi Pontianak 78124<br/>Telp/Fax: (0561) 577963 email: info@fmipa.untan.ac.id / sisfo@untan.ac.id</div>
+    </td>
+  </tr>
+  <tr>
+    <td class="meta-label" style="width:16%;">No. Dokumen</td>
+    <td style="width:24%; text-align:center;">FMIPA/SISFO/UAS/PAPB-A/2026</td>
+    <td class="meta-label" style="width:13%;">No Revisi</td>
+    <td style="width:8%; text-align:center;">00</td>
+    <td style="width:24%;"><span class="meta-label">Halaman:</span> Laporan Proyek (Terisi)</td>
+  </tr>
+  <tr>
+    <td class="meta-label">Tanggal Terbit</td>
+    <td style="text-align:center;">12 September 2026</td>
+    <td class="meta-label">Review Kaprodi</td>
+    <td colspan="2" style="text-align:center;">Ibnur Rusi, S.Kom., M.M.</td>
+  </tr>
+  <tr>
+    <td class="meta-label">Nama Mahasiswa</td>
+    <td colspan="5">1. <strong>M. Arifqu Wa Liin</strong> &nbsp;&nbsp;&nbsp; 2. <strong>M. Fadjri Akbar</strong> &nbsp;&nbsp;&nbsp; 3. <strong>Evan Mulya Oktarohmat</strong></td>
+  </tr>
+  <tr>
+    <td class="meta-label">NIM</td>
+    <td colspan="5">1. <strong>H1101241058</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. <strong>[NIM M. Fadjri Akbar]</strong> &nbsp;&nbsp;&nbsp;&nbsp; 3. <strong>H1101241066</strong></td>
+  </tr>
+  <tr>
+    <td class="meta-label">Kelas / Kelompok</td>
+    <td colspan="5"><strong>Kelas A / Kelompok 4 — SehatKu (Aplikasi Pendaftaran &amp; Rekam Medis Klinik)</strong></td>
+  </tr>
+</table>
+
+<div class="exam-banner">
+  <div class="u1">UJIAN AKHIR SEMESTER</div>
+  <div class="u2">SEMESTER GANJIL TAHUN AKADEMIK 2026/2027</div>
+  <div class="u3">PROJECT-BASED LEARNING (PBL)</div>
+</div>
+
+<table>
+  <tr><td class="meta-label" style="width:26%;">Nama Mata Kuliah</td><td>Pengembangan Aplikasi Perangkat Bergerak (A)</td></tr>
+  <tr><td class="meta-label">Pengampu</td><td>Syahru Rahmayuda, S.Kom., M.Kom</td></tr>
+  <tr><td class="meta-label">SKS</td><td>3 SKS</td></tr>
+  <tr><td class="meta-label">Hari/Tanggal</td><td>Kamis, 26 November 2026</td></tr>
+  <tr><td class="meta-label">Program Studi</td><td>Sistem Informasi</td></tr>
+  <tr><td class="meta-label">Waktu</td><td>13.20 – 16.00 (Pengerjaan Proyek: 1 Minggu)</td></tr>
+  <tr><td class="meta-label">Sifat</td><td>CLOSE BOOK</td></tr>
+  <tr><td class="meta-label">Kelas</td><td>A (Laporan Kelompok 4)</td></tr>
+  <tr><td class="meta-label">Platform</td><td>Android Studio &amp; Flutter Web (Flutter 3.50.1 / Dart 3.14.0)</td></tr>
+</table>
+
+<div class="section-bar">PETUNJUK PENGERJAAN (PROJECT-BASED LEARNING)</div>
+<ol style="margin:4px 0 10px 18px; padding:0; font-size:8.8pt;">
+  <li>Tuliskan nama lengkap dan NIM seluruh anggota kelompok pada kolom identitas di atas.</li>
+  <li>Proyek dikerjakan <strong>berkelompok</strong> (4 kelompok &times; 3 mahasiswa) sesuai tema/studi kasus yang telah ditentukan.</li>
+  <li>Mahasiswa dapat menggunakan <strong>FlutterLab.io</strong> (berbasis web) atau <strong>Android Studio</strong> (offline/lokal).</li>
+  <li>Waktu pengerjaan <strong>1 minggu (7 hari)</strong> mengikuti jadwal tahapan pada dokumen ini.</li>
+  <li>Setiap soal/tugas wajib memenuhi indikator <strong>CPMK</strong> dan <strong>Sub-CPMK</strong> yang tertera pada badge soal.</li>
+  <li>Seluruh <em>source code</em> diunggah ke <strong>GitHub repository</strong> kelompok (<code>https://github.com/arifquuu/sehatku</code>); sertakan README, dokumentasi analisis bisnis, ERD/skema basis data, tangkapan layar, dan video demo (3–5 menit).</li>
+  <li>Kumpulkan <strong>APK/build aplikasi</strong> (<code>v1.0.0</code> di GitHub Releases) + laporan proyek.</li>
+  <li>Sifat ujian <strong>close book</strong>: tidak boleh menyalin kode/laporan kelompok lain. Plagiasi/clone repo tanpa atribusi &rArr; nilai 0.</li>
+  <li>Kesalahan teknis (bug) adalah hal wajar; yang dinilai adalah <strong>proses, dokumentasi, dan hasil testing</strong> (lihat Tugas 13).</li>
+</ol>
+
+<!-- ==================== CPL, CPMK, SUB-CPMK ==================== -->
+<div class="section-bar">CAPAIAN PEMBELAJARAN LULUSAN (CPL) DAN CAPAIAN PEMBELAJARAN MATA KULIAH (CPMK)</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width:10%;">Kode</th>
+      <th>Deskripsi CPL</th>
+      <th style="width:11%;text-align:center;">CPMK012</th>
+      <th style="width:11%;text-align:center;">CPMK053</th>
+      <th style="width:11%;text-align:center;">CPMK093</th>
+      <th style="width:10%;text-align:center;">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>CPL01</strong></td>
+      <td>Mampu memahami dan menerapkan konsep dasar Sistem Informasi dalam mendukung proses bisnis dan keputusan organisasi, menggunakan alat dan metode pengembangan sistem informasi yang relevan untuk membuat rekomendasi analisis bisnis organisasi, dan menilai proses sistem.</td>
+      <td style="text-align:center;"><strong>33,33</strong></td><td style="text-align:center;">-</td><td style="text-align:center;">-</td><td style="text-align:center;">33,33%</td>
+    </tr>
+    <tr>
+      <td><strong>CPL05</strong></td>
+      <td>Mampu menganalisis, merancang, dan membangun perangkat lunak yang dapat mendukung proses bisnis organisasi.</td>
+      <td style="text-align:center;">-</td><td style="text-align:center;"><strong>33,33</strong></td><td style="text-align:center;">-</td><td style="text-align:center;">33,33%</td>
+    </tr>
+    <tr>
+      <td><strong>CPL09</strong></td>
+      <td>Mampu mengidentifikasi, menganalisis, dan menciptakan ide inovatif serta solusi digital untuk memberikan nilai bagi bisnis dan masyarakat, serta mendukung keberlanjutan kewirausahaan digital.</td>
+      <td style="text-align:center;">-</td><td style="text-align:center;">-</td><td style="text-align:center;"><strong>33,34</strong></td><td style="text-align:center;">33,34%</td>
+    </tr>
+    <tr>
+      <td colspan="2"><strong>Total Persentase CPMK</strong></td>
+      <td style="text-align:center;"><strong>33,33%</strong></td>
+      <td style="text-align:center;"><strong>33,33%</strong></td>
+      <td style="text-align:center;"><strong>33,34%</strong></td>
+      <td style="text-align:center;"><strong>100%</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="sub-bar">Deskripsi CPMK</div>
+<table>
+  <thead><tr><th style="width:14%;">Kode</th><th>Deskripsi CPMK</th><th style="width:11%;text-align:center;">Bobot</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge b-blue">CPMK012</span></td><td>Mampu menerapkan alat dan metode pengembangan sistem informasi yang relevan untuk membuat rekomendasi analisis bisnis organisasi, dan menilai proses sistem.</td><td style="text-align:center;">33,33%</td></tr>
+    <tr><td><span class="badge b-green">CPMK053</span></td><td>Mampu membangun perangkat lunak yang dapat mendukung proses bisnis organisasi.</td><td style="text-align:center;">33,33%</td></tr>
+    <tr><td><span class="badge b-orange">CPMK093</span></td><td>Mampu menciptakan ide inovatif serta solusi digital dalam memberikan nilai bagi bisnis dan masyarakat untuk mendukung keberlanjutan kewirausahaan digital.</td><td style="text-align:center;">33,34%</td></tr>
+  </tbody>
+</table>
+
+<div class="sub-bar">Sub-Capaian Pembelajaran Mata Kuliah (Sub-CPMK)</div>
+<table>
+  <thead><tr><th style="width:16%;">Kode</th><th>Deskripsi Sub-CPMK</th><th style="width:13%;">Induk</th><th style="width:11%;">Topik</th></tr></thead>
+  <tbody>
+    <tr><td>Sub-CPMK0121</td><td>Mampu menganalisis ekosistem aplikasi mobile, memilih alat (FlutterLab.io/Android Studio), dan merancang arsitektur aplikasi yang relevan dengan kebutuhan bisnis.</td><td><span class="badge b-blue">CPMK012</span></td><td>Topik 1</td></tr>
+    <tr><td>Sub-CPMK0531</td><td>Mampu melakukan setup lingkungan pengembangan dan menerapkan konsep dasar bahasa Dart (tipe data, OOP, koleksi).</td><td><span class="badge b-green">CPMK053</span></td><td>Topik 2</td></tr>
+    <tr><td>Sub-CPMK0532</td><td>Mampu membangun antarmuka berbasis widget dan layout Flutter yang responsif.</td><td><span class="badge b-green">CPMK053</span></td><td>Topik 3</td></tr>
+    <tr><td>Sub-CPMK0533</td><td>Mampu membangun list dinamis dan mengelola koleksi data (List/Map) pada aplikasi.</td><td><span class="badge b-green">CPMK053</span></td><td>Topik 4</td></tr>
+    <tr><td>Sub-CPMK0534</td><td>Mampu mengimplementasikan interaksi pengguna dan navigasi antar halaman.</td><td><span class="badge b-green">CPMK053</span></td><td>Topik 5</td></tr>
+    <tr><td>Sub-CPMK0535</td><td>Mampu mengelola state sederhana menggunakan setState.</td><td><span class="badge b-green">CPMK053</span></td><td>Topik 6</td></tr>
+    <tr><td>Sub-CPMK0536</td><td>Mampu mengelola state lanjutan menggunakan Provider (ChangeNotifier/Consumer).</td><td><span class="badge b-green">CPMK053</span></td><td>Topik 7</td></tr>
+    <tr><td>Sub-CPMK0537</td><td>Mampu menerapkan pemrograman asinkron (Future/async/await) dan menjelaskan perbedaan sinkron vs asinkron.</td><td><span class="badge b-green">CPMK053</span></td><td>Topik 8</td></tr>
+    <tr><td>Sub-CPMK0538</td><td>Mampu mengakses network dan mengambil data dari API/Internet serta mem-parsing JSON.</td><td><span class="badge b-green">CPMK053</span></td><td>Topik 9</td></tr>
+    <tr><td>Sub-CPMK0539</td><td>Mampu menerapkan penyimpanan data lokal (SQLite, Hive, dan/atau SharedPreferences).</td><td><span class="badge b-green">CPMK053</span></td><td>Topik 10</td></tr>
+    <tr><td>Sub-CPMK05310</td><td>Mampu membangun sistem autentikasi pengguna (register/login) dengan basis data MySQL.</td><td><span class="badge b-green">CPMK053</span></td><td>Topik 11</td></tr>
+    <tr><td>Sub-CPMK05311</td><td>Mampu berinteraksi dengan perangkat keras dan menampilkan notifikasi (local notification).</td><td><span class="badge b-green">CPMK053</span></td><td>Topik 12</td></tr>
+    <tr><td>Sub-CPMK0122</td><td>Mampu melakukan testing (unit/widget/TDD), debugging, dan menilai proses sistem berdasarkan hasil pengujian.</td><td><span class="badge b-blue">CPMK012</span></td><td>Topik 13</td></tr>
+    <tr><td>Sub-CPMK0931</td><td>Mampu melakukan deployment aplikasi dan menyajikan solusi digital inovatif bernilai bisnis.</td><td><span class="badge b-orange">CPMK093</span></td><td>Topik 14</td></tr>
+  </tbody>
+</table>
+
+<!-- ==================== PEMBAGIAN KELOMPOK & STUDI KASUS ==================== -->
+<div class="section-bar">PEMBAGIAN KELOMPOK &amp; TEMA (12 MAHASISWA = 4 KELOMPOK &times; 3 ORANG)</div>
+<table>
+  <thead><tr><th style="width:13%;">Kelompok</th><th style="width:36%;">Anggota (Nama / NIM)</th><th style="width:17%;">Tema Aplikasi</th><th>Studi Kasus</th></tr></thead>
+  <tbody>
+    <tr><td>Kelompok 1</td><td>1. ................ / ............<br/>2. ................ / ............<br/>3. ................ / ............</td><td><strong>CerdasCanteen</strong></td><td>Aplikasi pemesanan makanan kantin kampus</td></tr>
+    <tr><td>Kelompok 2</td><td>1. ................ / ............<br/>2. ................ / ............<br/>3. ................ / ............</td><td><strong>PustakaKita</strong></td><td>Aplikasi perpustakaan digital kampus</td></tr>
+    <tr><td>Kelompok 3</td><td>1. ................ / ............<br/>2. ................ / ............<br/>3. ................ / ............</td><td><strong>WarungKu POS</strong></td><td>Aplikasi kasir &amp; laporan penjualan UMKM</td></tr>
+    <tr style="background:#f0fdfa;">
+      <td><strong>Kelompok 4</strong></td>
+      <td>1. <strong>M. Arifqu Wa Liin</strong> / H1101241058<br/>2. <strong>M. Fadjri Akbar</strong> / [NIM Fadjri]<br/>3. <strong>Evan Mulya Oktarohmat</strong> / H1101241066</td>
+      <td><strong>SehatKu</strong></td>
+      <td>Aplikasi pendaftaran &amp; rekam medis klinik</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="note-yellow">
+  <strong>Pembagian peran dalam kelompok:</strong> <strong>Lead Developer</strong>: M. Arifqu Wa Liin (arsitektur, routing, Provider, backend auth, notifikasi/galeri, QR &amp; build); <strong>UI/UX &amp; Data</strong>: M. Fadjri Akbar (wireframe, tema responsif, list dokter, halaman UI, API JSON, SQLite/Hive/SharedPrefs, ERD); <strong>QA &amp; Dokumentasi</strong>: Evan Mulya Oktarohmat (program Dart dasar, widget <code>setState</code>, unit/widget test &amp; TDD, analisis Flutter &amp; bisnis, laporan, slide, video demo). Setiap anggota memiliki riwayat commit di GitHub (branch <code>arif</code>, <code>fajri</code>, <code>evan</code>).
+</div>
+
+<div class="section-bar">STUDI KASUS TIAP KELOMPOK</div>
+<div class="grid-2">
+  <div class="case-card">
+    <h4>Kelompok 1 — CerdasCanteen</h4>
+    <p>Topik 1–14 | <span class="badge b-blue">CPMK012</span> <span class="badge b-green">CPMK053</span> <span class="badge b-orange">CPMK093</span></p>
+    <p><strong>Masalah:</strong> Antrian kantin kampus sangat panjang saat jam istirahat; mahasiswa kehilangan waktu dan penjual kesulitan mencatat pesanan.</p>
+  </div>
+  <div class="case-card">
+    <h4>Kelompok 2 — PustakaKita</h4>
+    <p>Topik 1–14 | <span class="badge b-blue">CPMK012</span> <span class="badge b-green">CPMK053</span> <span class="badge b-orange">CPMK093</span></p>
+    <p><strong>Masalah:</strong> Katalog perpustakaan kampus masih manual; mahasiswa tidak mengetahui ketersediaan buku dan sering terlambat mengembalikan.</p>
+  </div>
+  <div class="case-card">
+    <h4>Kelompok 3 — WarungKu POS</h4>
+    <p>Topik 1–14 | <span class="badge b-blue">CPMK012</span> <span class="badge b-green">CPMK053</span> <span class="badge b-orange">CPMK093</span></p>
+    <p><strong>Masalah:</strong> UMKM binaan kampus mencatat penjualan di buku tulis; sulit merekap omzet dan memantau stok barang.</p>
+  </div>
+  <div class="case-card active-group">
+    <h4>Kelompok 4 — SehatKu (Studi Kasus Terpilih)</h4>
+    <p>Topik 1–14 | <span class="badge b-blue">CPMK012</span> <span class="badge b-green">CPMK053</span> <span class="badge b-orange">CPMK093</span></p>
+    <p><strong>Masalah:</strong> Pasien klinik harus datang pagi untuk antre; jadwal dokter tidak transparan dan riwayat kunjungan hilang.</p>
+    <ul>
+      <li>Daftar dokter &amp; jadwal praktik (lokal 12 dokter &amp; REST API); booking online multi-halaman.</li>
+      <li>State lokal (<code>setState</code>) &amp; global (<code>MultiProvider</code>); rekam medis ringkas di SQLite/Hive.</li>
+      <li>Autentikasi pasien (PHP + MySQL <code>bcrypt</code>); notifikasi pengingat kontrol; galeri/kamera foto dokumen.</li>
+      <li>Analisis bisnis: rekap kunjungan per poli (<code>visitCountByPoli</code>) &amp; Tiket QR Antrean.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== SOAL PROYEK TAHAPAN 1-14 ==================== -->
+<div class="section-bar">SOAL PROYEK (TAHAPAN 1–14) — TOTAL 100 POIN (LENGKAP DENGAN JAWABAN &amp; BUKTI KELOMPOK 4)</div>
+<p style="font-size:8.6pt; margin:4px 0 8px 0;">
+  Repository GitHub: <code>https://github.com/arifquuu/sehatku</code> &nbsp;|&nbsp; Release APK &amp; Web (<code>v1.0.0</code>): <code>https://github.com/arifquuu/sehatku/releases/tag/v1.0.0</code>
+</p>
+
+<!-- TUGAS 1 -->
+<div class="task-box cpmk012 allow-split">
+  <div class="task-head">Tugas 1 — Pengantar Aplikasi Mobile &amp; Ekosistem Flutter <span class="badge b-blue">CPMK012</span> <span class="badge b-blue">Sub-CPMK0121</span> <span class="badge b-dark">13 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Buat <strong>dokumen analisis singkat (1–2 halaman)</strong>: mengapa Flutter dipilih untuk studi kasus kelompok Anda; perbandingan Flutter vs Native (Android Studio/Kotlin) dan vs framework lain.</li>
+      <li>Tentukan <strong>platform kerja</strong>: FlutterLab.io atau Android Studio — sertakan alasan &amp; screenshot lingkungan kerja.</li>
+      <li>Rancang <strong>arsitektur aplikasi</strong> (mis. MVVM/sederhana: View–State–Service) + wireframe 3 layar utama.</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — Kelompok 4 (SehatKu)</div>
+    <p><strong>A. Alasan Memilih Flutter:</strong> (1) <em>Single codebase</em> untuk target Android APK dan Flutter Web secara bersamaan; (2) Konsistensi UI Material 3 dengan tema Light/Dark (<code>SehatKuTheme</code>) serta dukungan layout responsif Mobile (<code>ListView</code>) dan Tablet (<code>GridView</code>); (3) Ekosistem paket lengkap (<code>provider</code>, <code>sqflite</code>, <code>hive_flutter</code>, <code>http</code>, <code>flutter_local_notifications</code>, <code>image_picker</code>, <code>qr_flutter</code>); (4) <em>Hot reload</em> mempercepat integrasi paralel tim 3 orang.</p>
+    <table>
+      <thead><tr><th>Aspek</th><th>Flutter (Dart) — Pilihan Tim</th><th>Native Android (Kotlin)</th><th>React Native</th><th>Ionic / WebView</th></tr></thead>
+      <tbody>
+        <tr><td>Target Platform</td><td>Android, Web, Desktop 1 kode</td><td>Hanya Android</td><td>Android &amp; iOS (Web ekstra)</td><td>Hybrid WebView</td></tr>
+        <tr><td>Performa Rendering</td><td>Tinggi (Impeller/Skia)</td><td>Tertinggi (Native OS)</td><td>Baik (JS Bridge/JSI)</td><td>Sedang (DOM WebView)</td></tr>
+        <tr><td>Offline-First &amp; Paket</td><td>Sangat lengkap</td><td>Sangat baik (Room)</td><td>Bergantung modul pihak ke-3</td><td>Terbatas plugin Web</td></tr>
+      </tbody>
+    </table>
+    <p><strong>B. Platform Kerja:</strong> Tim memakai <strong>Android Studio / VS Code + Flutter SDK 3.50.1 (Dart 3.14.0)</strong> secara lokal terhubung dengan GitHub karena proyek membutuhkan build APK Android rilis, integrasi backend PHP/MySQL lokal, serta pengujian <code>flutter test</code> (lihat screenshot lingkungan pada Tugas 2).</p>
+    <p><strong>C. Arsitektur Aplikasi (Provider MVVM-Layered):</strong> <code>models/</code> (5 model entitas) &rarr; <code>services/</code> (<code>ApiService</code>, <code>AuthService</code>, <code>DatabaseHelper</code>, <code>LocalStorageService</code>, <code>NotificationService</code>, <code>MediaService</code>, <code>AsyncDemoService</code>) &rarr; <code>providers/</code> (<code>AuthProvider</code>, <code>ClinicDataProvider</code>) &rarr; <code>routing/</code> (<code>AppRouter</code> &amp; <code>AuthGate</code>) &rarr; <code>screens/</code> &amp; <code>widgets/</code>.</p>
+    <div class="svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="1260" height="780" viewBox="0 0 1260 780" font-family="Segoe UI, Inter, Arial, sans-serif">
+  <defs>
+    <style>
+      .bg { fill: #F8FAFC; }
+      .title { font-size: 22px; font-weight: 700; fill: #0F172A; }
+      .subtitle { font-size: 13px; fill: #475569; }
+      .phone { fill: #FFFFFF; stroke: #334155; stroke-width: 2.5; rx: 28; }
+      .appbar { fill: #0D9488; }
+      .appbar-text { font-size: 14px; font-weight: 700; fill: #FFFFFF; }
+      .card { fill: #FFFFFF; stroke: #CBD5E1; stroke-width: 1.5; rx: 12; }
+      .banner { fill: #CCFBF1; stroke: #0D9488; stroke-width: 1.5; stroke-dasharray: 5,3; rx: 14; }
+      .input { fill: #F1F5F9; stroke: #94A3B8; stroke-width: 1.2; rx: 10; }
+      .chip-active { fill: #0D9488; rx: 14; }
+      .chip { fill: #E2E8F0; rx: 14; }
+      .btn { fill: #0D9488; rx: 10; }
+      .btn-outline { fill: #F0FDFA; stroke: #0D9488; stroke-width: 1.2; rx: 8; }
+      .nav { fill: #F8FAFC; stroke: #CBD5E1; stroke-width: 1.5; }
+      .label-bold { font-size: 12px; font-weight: 700; fill: #1E293B; }
+      .label { font-size: 11px; fill: #475569; }
+      .label-sm { font-size: 10px; fill: #64748B; }
+      .label-white { font-size: 11px; font-weight: 700; fill: #FFFFFF; }
+      .label-teal { font-size: 10px; font-weight: 700; fill: #0F766E; }
+      .badge { fill: #FEF3C7; stroke: #D97706; stroke-width: 1; rx: 8; }
+      .arrow { stroke: #0D9488; stroke-width: 2.2; fill: none; marker-end: url(#arrowhead); stroke-dasharray: 6,4; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0D9488" />
+    </marker>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1260" height="780" class="bg" />
+  <text x="630" y="38" text-anchor="middle" class="title">WIREFRAME 3 LAYAR UTAMA — APLIKASI KLINIK SEHATKU (KELOMPOK 4)</text>
+  <text x="630" y="60" text-anchor="middle" class="subtitle">Tugas 1 (Desain UI/UX) • Fadjri • Beranda &amp; Jadwal Dokter | Detail &amp; Form Booking | Riwayat Rekam Medis</text>
+
+  <!-- ========================================================= -->
+  <!-- LAYAR 1: BERANDA & JADWAL DOKTER                          -->
+  <!-- ========================================================= -->
+  <g transform="translate(55, 85)">
+    <text x="170" y="18" text-anchor="middle" class="label-bold" font-size="14">1. Beranda &amp; Jadwal Dokter</text>
+    <rect x="0" y="30" width="340" height="620" rx="28" class="phone" />
+
+    <!-- Status Bar & AppBar -->
+    <path d="M2 58 Q2 32 28 32 L312 32 Q338 32 338 58 L338 92 L2 92 Z" class="appbar" />
+    <text x="20" y="52" font-size="10" fill="#CCFBF1">09:41</text>
+    <text x="20" y="76" class="appbar-text">SehatKu Klinik</text>
+    <circle cx="308" cy="70" r="13" fill="#0F766E" />
+    <text x="308" y="74" text-anchor="middle" class="label-white">🔔</text>
+
+    <!-- Hero Stack Banner Antrean -->
+    <rect x="16" y="104" width="308" height="82" rx="14" class="banner" />
+    <text x="28" y="125" class="label-teal">STATUS ANTREAN AKTIF (STACK BANNER)</text>
+    <text x="28" y="145" class="label-bold">No. Antrean: A-012 • Poli Umum</text>
+    <text x="28" y="162" class="label">dr. Andi Pratama, Sp.PD • 09:00 WIB</text>
+    <rect x="236" y="132" width="76" height="28" rx="8" class="btn" />
+    <text x="274" y="150" text-anchor="middle" class="label-white">Tiket QR</text>
+
+    <!-- Search TextField -->
+    <rect x="16" y="198" width="308" height="38" rx="10" class="input" />
+    <text x="30" y="221" class="label">🔍 Cari dokter, spesialis, atau poli...</text>
+
+    <!-- Poli Filter Chips -->
+    <rect x="16" y="246" width="64" height="26" rx="13" class="chip-active" />
+    <text x="48" y="263" text-anchor="middle" class="label-white">Semua</text>
+    <rect x="86" y="246" width="74" height="26" rx="13" class="chip" />
+    <text x="123" y="263" text-anchor="middle" class="label">Poli Umum</text>
+    <rect x="166" y="246" width="68" height="26" rx="13" class="chip" />
+    <text x="200" y="263" text-anchor="middle" class="label">Poli Gigi</text>
+    <rect x="240" y="246" width="84" height="26" rx="13" class="chip" />
+    <text x="282" y="263" text-anchor="middle" class="label">Poli Anak</text>
+
+    <!-- Section Title -->
+    <text x="18" y="294" class="label-bold">Daftar Dokter &amp; Jadwal Praktik (API / Lokal)</text>
+
+    <!-- Doctor Card 1 -->
+    <rect x="16" y="304" width="308" height="88" rx="12" class="card" />
+    <rect x="26" y="316" width="56" height="64" rx="10" fill="#E2E8F0" stroke="#94A3B8" />
+    <text x="54" y="352" text-anchor="middle" class="label-sm">[Foto]</text>
+    <text x="92" y="328" class="label-bold">dr. Siti Rahmawati, Sp.A</text>
+    <text x="92" y="344" class="label-teal">Poli Anak • Ruang R-102</text>
+    <text x="92" y="360" class="label-sm">🕒 Senin, Rabu, Jumat (08:00 - 12:00)</text>
+    <text x="92" y="376" class="label-sm">⭐ 4.9 • Sisa Kuota: 8 Pasien</text>
+    <rect x="252" y="354" width="62" height="26" rx="8" class="btn" />
+    <text x="283" y="371" text-anchor="middle" class="label-white">Booking</text>
+
+    <!-- Doctor Card 2 -->
+    <rect x="16" y="402" width="308" height="88" rx="12" class="card" />
+    <rect x="26" y="414" width="56" height="64" rx="10" fill="#E2E8F0" stroke="#94A3B8" />
+    <text x="54" y="450" text-anchor="middle" class="label-sm">[Foto]</text>
+    <text x="92" y="426" class="label-bold">drg. Budi Santoso</text>
+    <text x="92" y="442" class="label-teal">Poli Gigi &amp; Mulut • Ruang R-105</text>
+    <text x="92" y="458" class="label-sm">🕒 Selasa &amp; Kamis (13:00 - 17:00)</text>
+    <text x="92" y="474" class="label-sm">⭐ 4.8 • Sisa Kuota: 5 Pasien</text>
+    <rect x="252" y="452" width="62" height="26" rx="8" class="btn" />
+    <text x="283" y="469" text-anchor="middle" class="label-white">Booking</text>
+
+    <!-- Doctor Card 3 -->
+    <rect x="16" y="500" width="308" height="82" rx="12" class="card" />
+    <rect x="26" y="512" width="56" height="58" rx="10" fill="#E2E8F0" stroke="#94A3B8" />
+    <text x="54" y="545" text-anchor="middle" class="label-sm">[Foto]</text>
+    <text x="92" y="524" class="label-bold">dr. Hendra Wijaya, Sp.PD</text>
+    <text x="92" y="540" class="label-teal">Poli Penyakit Dalam • Ruang R-201</text>
+    <text x="92" y="556" class="label-sm">🕒 Senin - Kamis (09:00 - 13:00)</text>
+    <rect x="252" y="546" width="62" height="26" rx="8" class="btn" />
+    <text x="283" y="563" text-anchor="middle" class="label-white">Booking</text>
+
+    <!-- BottomNavigationBar -->
+    <path d="M2 596 L338 596 L338 622 Q338 648 312 648 L28 648 Q2 648 2 622 Z" class="nav" />
+    <text x="46" y="620" text-anchor="middle" class="label-teal">🏠 Beranda</text>
+    <text x="128" y="620" text-anchor="middle" class="label-sm">📅 Jadwal</text>
+    <text x="214" y="620" text-anchor="middle" class="label-sm">📋 Rekam Medis</text>
+    <text x="296" y="620" text-anchor="middle" class="label-sm">👤 Profil</text>
+  </g>
+
+  <!-- ========================================================= -->
+  <!-- LAYAR 2: DETAIL DOKTER & FORM BOOKING ONLINE              -->
+  <!-- ========================================================= -->
+  <g transform="translate(460, 85)">
+    <text x="170" y="18" text-anchor="middle" class="label-bold" font-size="14">2. Detail Dokter &amp; Form Booking</text>
+    <rect x="0" y="30" width="340" height="620" rx="28" class="phone" />
+
+    <!-- AppBar -->
+    <path d="M2 58 Q2 32 28 32 L312 32 Q338 32 338 58 L338 92 L2 92 Z" class="appbar" />
+    <text x="20" y="75" class="appbar-text">← Detail &amp; Booking Jadwal</text>
+    <text x="308" y="75" text-anchor="middle" class="appbar-text">♥</text>
+
+    <!-- Doctor Summary Header Card -->
+    <rect x="16" y="104" width="308" height="96" rx="12" class="card" />
+    <rect x="28" y="116" width="64" height="72" rx="12" fill="#CCFBF1" stroke="#0D9488" />
+    <text x="60" y="156" text-anchor="middle" class="label-teal">[Avatar]</text>
+    <text x="104" y="128" class="label-bold">dr. Siti Rahmawati, Sp.A</text>
+    <text x="104" y="144" class="label-teal">Spesialis Anak • Poli Anak</text>
+    <text x="104" y="160" class="label-sm">STR: 31.2.1.401.2.21.098212</text>
+    <text x="104" y="176" class="label-sm">Biaya: Rp 75.000 / Gratis BPJS</text>
+    <text x="104" y="191" class="label-sm">Pengalaman: 9 Tahun • ⭐ 4.9</text>
+
+    <!-- Date & Session Picker -->
+    <text x="18" y="220" class="label-bold">Pilih Tanggal &amp; Sesi Jam Praktik</text>
+    <rect x="16" y="228" width="308" height="36" rx="10" class="input" />
+    <text x="28" y="250" class="label">📅 Rabu, 27 November 2026</text>
+    <text x="306" y="250" text-anchor="end" class="label-teal">Ubah</text>
+
+    <rect x="16" y="272" width="96" height="30" rx="8" class="chip-active" />
+    <text x="64" y="291" text-anchor="middle" class="label-white">08:00 - 09:30</text>
+    <rect x="122" y="272" width="96" height="30" rx="8" class="btn-outline" />
+    <text x="170" y="291" text-anchor="middle" class="label-teal">09:30 - 11:00</text>
+    <rect x="228" y="272" width="96" height="30" rx="8" class="btn-outline" />
+    <text x="276" y="291" text-anchor="middle" class="label-teal">11:00 - 12:00</text>
+
+    <!-- Patient Form Fields -->
+    <text x="18" y="324" class="label-bold">Form Pendaftaran Pasien</text>
+
+    <rect x="16" y="332" width="308" height="36" rx="8" class="input" />
+    <text x="28" y="354" class="label">👤 Nama Lengkap Pasien</text>
+
+    <rect x="16" y="376" width="308" height="36" rx="8" class="input" />
+    <text x="28" y="398" class="label">🪪 NIK / Nomor Rekam Medis (16 Digit)</text>
+
+    <!-- Payment Type Toggle -->
+    <text x="18" y="430" class="label-bold">Jenis Penjamin Layanan</text>
+    <rect x="16" y="438" width="148" height="32" rx="8" class="chip-active" />
+    <text x="90" y="458" text-anchor="middle" class="label-white">✓ BPJS Kesehatan</text>
+    <rect x="176" y="438" width="148" height="32" rx="8" class="btn-outline" />
+    <text x="250" y="458" text-anchor="middle" class="label-teal">Pasien Umum</text>
+
+    <!-- Chief Complaint -->
+    <rect x="16" y="480" width="308" height="66" rx="8" class="input" />
+    <text x="28" y="502" class="label">📝 Keluhan Utama / Gejala Pasien...</text>
+    <text x="28" y="520" class="label-sm">(Mis: Demam 2 hari, batuk ringan, kontrol imunisasi)</text>
+
+    <!-- Primary Submit CTA -->
+    <rect x="16" y="562" width="308" height="44" rx="12" class="btn" />
+    <text x="170" y="589" text-anchor="middle" class="appbar-text">Konfirmasi Booking &amp; Ambil Antrean</text>
+
+    <text x="170" y="628" text-anchor="middle" class="label-sm">Data tersimpan ke SQLite &amp; disinkronkan ke Jadwal</text>
+  </g>
+
+  <!-- ========================================================= -->
+  <!-- LAYAR 3: RIWAYAT REKAM MEDIS RINGKAS (SQLITE CRUD)        -->
+  <!-- ========================================================= -->
+  <g transform="translate(865, 85)">
+    <text x="170" y="18" text-anchor="middle" class="label-bold" font-size="14">3. Riwayat Rekam Medis (SQLite)</text>
+    <rect x="0" y="30" width="340" height="620" rx="28" class="phone" />
+
+    <!-- AppBar -->
+    <path d="M2 58 Q2 32 28 32 L312 32 Q338 32 338 58 L338 92 L2 92 Z" class="appbar" />
+    <text x="20" y="76" class="appbar-text">Rekam Medis Pasien</text>
+    <rect x="242" y="56" width="82" height="26" rx="8" fill="#0F766E" />
+    <text x="283" y="73" text-anchor="middle" class="label-white">+ Catatan</text>
+
+    <!-- Summary Stats Row -->
+    <rect x="16" y="104" width="96" height="58" rx="10" class="banner" />
+    <text x="64" y="126" text-anchor="middle" class="label-bold">14</text>
+    <text x="64" y="146" text-anchor="middle" class="label-sm">Total Kunjungan</text>
+
+    <rect x="122" y="104" width="96" height="58" rx="10" class="banner" />
+    <text x="170" y="126" text-anchor="middle" class="label-bold">3 Poli</text>
+    <text x="170" y="146" text-anchor="middle" class="label-sm">Riwayat Layanan</text>
+
+    <rect x="228" y="104" width="96" height="58" rx="10" class="banner" />
+    <text x="276" y="126" text-anchor="middle" class="label-bold">02 Des</text>
+    <text x="276" y="146" text-anchor="middle" class="label-sm">Jadwal Kontrol</text>
+
+    <!-- Search / Filter Poli -->
+    <rect x="16" y="172" width="308" height="34" rx="8" class="input" />
+    <text x="28" y="193" class="label">🔍 Filter diagnosis, dokter, atau poli...</text>
+
+    <!-- Medical Record Card 1 -->
+    <rect x="16" y="218" width="308" height="122" rx="12" class="card" />
+    <rect x="28" y="228" width="86" height="20" rx="6" class="badge" />
+    <text x="71" y="242" text-anchor="middle" font-size="9" font-weight="700" fill="#B45309">20 Nov 2026</text>
+    <text x="122" y="242" class="label-teal">Poli Penyakit Dalam</text>
+    <text x="28" y="264" class="label-bold">Diagnosis: Gastritis Akut (Dispepsia)</text>
+    <text x="28" y="280" class="label">Dokter: dr. Hendra Wijaya, Sp.PD</text>
+    <text x="28" y="296" class="label-sm">💊 Resep: Omeprazole 20mg (2x1), Antasida</text>
+    <text x="28" y="312" class="label-sm">📌 Kontrol Ulang: 02 Des 2026 • TD: 120/80</text>
+    <text x="242" y="330" class="label-teal">[Edit]   [Hapus]</text>
+
+    <!-- Medical Record Card 2 -->
+    <rect x="16" y="350" width="308" height="116" rx="12" class="card" />
+    <rect x="28" y="360" width="86" height="20" rx="6" class="badge" />
+    <text x="71" y="374" text-anchor="middle" font-size="9" font-weight="700" fill="#B45309">04 Okt 2026</text>
+    <text x="122" y="374" class="label-teal">Poli Gigi &amp; Mulut</text>
+    <text x="28" y="396" class="label-bold">Diagnosis: Scaling &amp; Karies Molar 1</text>
+    <text x="28" y="412" class="label">Dokter: drg. Budi Santoso</text>
+    <text x="28" y="428" class="label-sm">💊 Tindakan: Pembersihan karang &amp; tambal komposit</text>
+    <text x="28" y="444" class="label-sm">📌 Kontrol Ulang: 04 Apr 2027 • TD: 118/78</text>
+    <text x="242" y="458" class="label-teal">[Edit]   [Hapus]</text>
+
+    <!-- Medical Record Card 3 -->
+    <rect x="16" y="476" width="308" height="106" rx="12" class="card" />
+    <rect x="28" y="486" width="86" height="20" rx="6" class="badge" />
+    <text x="71" y="500" text-anchor="middle" font-size="9" font-weight="700" fill="#B45309">12 Agu 2026</text>
+    <text x="122" y="500" class="label-teal">Poli Umum</text>
+    <text x="28" y="522" class="label-bold">Diagnosis: ISPA Ringan &amp; Observasi Febris</text>
+    <text x="28" y="538" class="label">Dokter: dr. Rina Kartika</text>
+    <text x="28" y="554" class="label-sm">💊 Resep: Paracetamol 500mg, Vitamin C</text>
+    <text x="242" y="572" class="label-teal">[Edit]   [Hapus]</text>
+
+    <!-- BottomNavigationBar -->
+    <path d="M2 596 L338 596 L338 622 Q338 648 312 648 L28 648 Q2 648 2 622 Z" class="nav" />
+    <text x="46" y="620" text-anchor="middle" class="label-sm">🏠 Beranda</text>
+    <text x="128" y="620" text-anchor="middle" class="label-sm">📅 Jadwal</text>
+    <text x="214" y="620" text-anchor="middle" class="label-teal">📋 Rekam Medis</text>
+    <text x="296" y="620" text-anchor="middle" class="label-sm">👤 Profil</text>
+  </g>
+
+  <!-- Navigation Flow Arrows between Screens -->
+  <path d="M398 455 L455 455" class="arrow" />
+  <text x="426" y="445" text-anchor="middle" class="label-teal">Navigator.push</text>
+  <text x="426" y="472" text-anchor="middle" class="label-sm">(Data Dokter)</text>
+
+  <path d="M803 668 L860 668" class="arrow" />
+  <text x="831" y="658" text-anchor="middle" class="label-teal">Simpan SQLite</text>
+  <text x="831" y="684" text-anchor="middle" class="label-sm">(Riwayat/Booking)</text>
+</svg>
+<div style="font-size:7.8pt;color:#475569;margin-top:3px;"><strong>Gambar 1.</strong> Wireframe 3 Layar Utama SehatKu (<code>docs/wireframes/wireframe_3_layar_utama_sehatku.svg</code>)</div></div>
+  </div>
+</div>
+
+<!-- TUGAS 2 -->
+<div class="task-box allow-split">
+  <div class="task-head">Tugas 2 — Setup Lingkungan &amp; Pengenalan Dart <span class="badge b-green">CPMK053</span> <span class="badge b-green">Sub-CPMK0531</span> <span class="badge b-dark">3 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Instalasi &amp; verifikasi: lampirkan screenshot <code>flutter doctor</code> / proyek FlutterLab yang berhasil dijalankan.</li>
+      <li>Buat 3 program Dart sesuai domain aplikasi kelompok: (a) class + inheritance, (b) koleksi List/Map, (c) function + null safety. Sertakan output konsol.</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — Folder <code>dart_basics/</code></div>
+    <p>Ketiga program Dart dasar dijalankan memakai <strong>Dart 3.14.0 / Flutter 3.50.1</strong>:</p>
+    <ul style="margin:3px 0 6px 16px;">
+      <li><code>dart_basics/class_inheritance_layanan.dart</code>: <code>LayananKlinik</code> (base class) diturunkan ke <code>LayananPoli</code> dan <code>LayananLaboratorium</code> dengan override <code>deskripsiSingkat()</code> dan perhitungan biaya Umum/BPJS.</li>
+      <li><code>dart_basics/koleksi_daftar_poli.dart</code>: <code>List&lt;Map&lt;String, dynamic&gt;&gt;</code> berisi 6 poliklinik SehatKu (kode A–F, kuota, terisi, tarif) serta <code>Map&lt;String, int&gt;</code> rekap sisa kuota dan filter <code>where()</code>.</li>
+      <li><code>dart_basics/function_null_safety.dart</code>: Fungsi dengan parameter nullable (<code>String? nomorBpjs</code>, <code>String? keluhanUtama</code>), operator <code>?.</code>, validasi NIK 16 digit, dan <code>formatNomorAntrean()</code>.</li>
+    </ul>
+    
+    <figure class="shot">
+      <img src="file:///c:/Users/Kistract/Documents/Tugas/sehatku/docs/screenshots/01_flutter_doctor_dan_dart_basics.png" alt="Gambar 2. Output flutter doctor dan eksekusi konsol 3 program Dart dasar (dart_basics/)" />
+      <figcaption>Gambar 2. Output flutter doctor dan eksekusi konsol 3 program Dart dasar (dart_basics/)</figcaption>
+    </figure>
+  
+  </div>
+</div>
+
+<!-- TUGAS 3 -->
+<div class="task-box allow-split">
+  <div class="task-head">Tugas 3 — Dasar Flutter: Widget &amp; Layout <span class="badge b-green">CPMK053</span> <span class="badge b-green">Sub-CPMK0532</span> <span class="badge b-dark">3 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Bangun layar utama aplikasi: gunakan <code>MaterialApp</code>, <code>Scaffold</code>, <code>AppBar</code>, <code>Column/Row/Stack/Container</code>, <code>Card</code>, <code>Image</code>, <code>TextField</code>.</li>
+      <li>Terapkan tema (warna/font sesuai identitas aplikasi) dan layout responsif (uji pada 2 ukuran layar).</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — <code>lib/theme/sehatku_theme.dart</code> &amp; <code>lib/screens/home_screen.dart</code></div>
+    <p>Tema klinis <code>SehatKuTheme</code> menggunakan warna utama Medical Teal (<code>#0D9488</code>) dan Sky Blue (<code>#0284C7</code>) dalam mode Terang dan Gelap. Halaman utama memakai <code>Stack</code> + <code>Image.asset</code> pada Hero Banner, <code>Row</code>/<code>Column</code> metrik cepat, <code>TextField</code> pencarian, serta <code>SehatKuResponsive</code> (breakpoint <code>650 px</code> &amp; <code>1040 px</code>) yang otomatis beralih antara <code>ListView</code> (Mobile 390&times;844) dan <code>GridView</code> 2–3 kolom (Tablet/Web 1024&times;768 / 1280&times;800).</p>
+    
+    <figure class="shot">
+      <img src="file:///c:/Users/Kistract/Documents/Tugas/sehatku/docs/screenshots/04_home_screen.png" alt="Gambar 3. Tampilan HomeScreen SehatKu (Grid responsif, Hero Banner, Pencarian &amp; Filter Poli)" />
+      <figcaption>Gambar 3. Tampilan HomeScreen SehatKu (Grid responsif, Hero Banner, Pencarian &amp; Filter Poli)</figcaption>
+    </figure>
+  
+  </div>
+</div>
+
+<!-- TUGAS 4 -->
+<div class="task-box">
+  <div class="task-head">Tugas 4 — List Dinamis &amp; Koleksi Data <span class="badge b-green">CPMK053</span> <span class="badge b-green">Sub-CPMK0533</span> <span class="badge b-dark">3 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Tampilkan minimal <strong>10 data</strong> studi kasus menggunakan <code>ListView.builder</code>/<code>GridView</code> dari model class (<code>List&lt;T&gt;</code>).</li>
+      <li>Tambahkan fitur pencarian/filter kategori yang mengubah isi list secara dinamis.</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — <code>lib/models/doctor_model.dart</code> &amp; <code>lib/data/dummy_clinic_data.dart</code></div>
+    <p>Model <code>Doctor</code> memuat atribut <code>id</code>, <code>name</code>, <code>poli</code>, <code>poliCode</code>, <code>specialistTitle</code>, <code>room</code>, <code>scheduleDays</code>, <code>scheduleTime</code>, <code>consultationFee</code>, <code>quota</code>, <code>isAvailable</code>, dan <code>isFromApi</code>. Dataset <code>DummyClinicData.localDoctors</code> menyediakan <strong>12 dokter lintas 6 poliklinik</strong> yang dirender lewat <code>ListView.separated</code>/<code>GridView.builder</code> menggunakan komponen <code>DoctorCard</code>, dilengkapi pencarian real-time (<code>setSearchQuery</code>) dan filter <code>ChoiceChip</code> poli (<code>setSelectedPoli</code>).</p>
+  </div>
+</div>
+
+<!-- TUGAS 5 -->
+<div class="task-box">
+  <div class="task-head">Tugas 5 — Interaksi Pengguna &amp; Navigasi Antar Halaman <span class="badge b-green">CPMK053</span> <span class="badge b-green">Sub-CPMK0534</span> <span class="badge b-dark">3 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Implementasikan <strong>named routes</strong> dan <code>Navigator.push</code> dengan pengantaran data (mis. dari list &rarr; halaman detail).</li>
+      <li>Buat minimal 4 halaman + <code>BottomNavigationBar</code> atau drawer.</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — <code>lib/routing/app_router.dart</code> &amp; <code>lib/screens/main_navigation_screen.dart</code></div>
+    <p><code>AppRouter.onGenerateRoute</code> mendaftarkan rute <code>/login</code>, <code>/register</code>, <code>/</code> (Beranda), <code>/jadwal</code>, <code>/rekam-medis</code>, <code>/profil</code>, <code>/booking</code> (menerima argumen objek <code>Doctor</code>), <code>/async-lab</code>, dan <code>/qr-ticket</code> (menerima argumen <code>BookingAppointment</code>). <code>MainNavigationScreen</code> menggabungkan <strong>BottomNavigationBar (4 tab utama)</strong> dan <strong>Navigation Drawer</strong> untuk akses pintas serta Lab Asinkron.</p>
+  </div>
+</div>
+
+<!-- TUGAS 6 -->
+<div class="task-box allow-split">
+  <div class="task-head">Tugas 6 — Manajemen State Dasar (setState) <span class="badge b-green">CPMK053</span> <span class="badge b-green">Sub-CPMK0535</span> <span class="badge b-dark">3 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Gunakan <code>setState</code> untuk interaksi lokal: badge jumlah item, tombol like/favorit, switch, form validasi.</li>
+      <li>Jelaskan dalam laporan kapan <code>setState</code> cukup dan kapan tidak.</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — <code>lib/widgets/clinic_prep_checklist_widget.dart</code></div>
+    <p>Dibuat komponen mandiri <code>ClinicPrepChecklistWidget</code> (dipasang di <code>BookingDetailScreen</code>) yang memakai <code>StatefulWidget</code> + <code>setState</code> untuk: (1) checklist kelengkapan berkas (KTP, kartu BPJS, daftar obat) yang memperbarui badge progres (<code>1/3 siap</code> &rarr; <code>2/3 siap</code>); (2) tombol <code>+</code>/<code>-</code> simulasi jumlah antrean di depan untuk menghitung estimasi tunggu (<code>4 antrean &bull; Est. 40 menit</code>); dan (3) tombol expand/collapse.</p>
+    <p><strong>Kapan <code>setState</code> cukup vs tidak:</strong> <code>setState</code> cukup untuk <em>ephemeral state</em> (state lokal yang hanya dipakai di dalam satu widget dan tidak perlu dibagikan ke layar lain, seperti checklist persiapan atau status collapse). Sebaliknya, <code>setState</code> <strong>tidak cukup</strong> untuk state global lintas halaman seperti sesi autentikasi pasien, daftar booking aktif, rekam medis SQLite, atau Mode Gelap yang harus sinkron di seluruh aplikasi &mdash; untuk itu digunakan <code>ChangeNotifier</code> + <code>MultiProvider</code>.</p>
+    
+    <figure class="shot">
+      <img src="file:///c:/Users/Kistract/Documents/Tugas/sehatku/docs/screenshots/05_booking_detail_dan_widget_setstate.png" alt="Gambar 4. Halaman Detail Dokter &amp; Booking menampilkan ClinicPrepChecklistWidget berbasis setState (2/3 siap, Est. 40 menit)" />
+      <figcaption>Gambar 4. Halaman Detail Dokter &amp; Booking menampilkan ClinicPrepChecklistWidget berbasis setState (2/3 siap, Est. 40 menit)</figcaption>
+    </figure>
+  
+  </div>
+</div>
+
+<!-- TUGAS 7 -->
+<div class="task-box">
+  <div class="task-head">Tugas 7 — Manajemen State Lanjutan (Provider) <span class="badge b-green">CPMK053</span> <span class="badge b-green">Sub-CPMK0536</span> <span class="badge b-dark">3 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Buat <code>ChangeNotifier</code> + <code>MultiProvider</code> untuk state global (mis. keranjang/booking/session) dengan <code>Consumer</code>/<code>Selector</code>.</li>
+      <li>Data state harus tetap sinkron saat berpindah halaman.</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — <code>lib/main.dart</code>, <code>AuthProvider</code> &amp; <code>ClinicDataProvider</code></div>
+    <p><code>MultiProvider</code> di <code>main.dart</code> mendaftarkan <code>AuthProvider</code> (sesi login MySQL/demo, token, status autentikasi) dan <code>ClinicDataProvider</code> (dokter, booking, rekam medis, favorit, profil, tema). Ketika pasien melakukan booking atau menandai dokter favorit (♥) di satu halaman, <code>notifyListeners()</code> otomatis menyinkronkan Beranda, Tab Jadwal, Tab Profil, dan Tiket QR Antrean melalui <code>context.watch</code> dan <code>Selector</code> (mis. pada <code>SehatKuApp</code> untuk <code>themeMode</code> dan <code>AuthGate</code>).</p>
+  </div>
+</div>
+
+<!-- TUGAS 8 -->
+<div class="task-box allow-split">
+  <div class="task-head">Tugas 8 — Pemrograman Asinkron di Dart <span class="badge b-green">CPMK053</span> <span class="badge b-green">Sub-CPMK0537</span> <span class="badge b-dark">3 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Implementasikan <code>Future</code>, <code>async/await</code>, <code>try-catch</code> pada proses loading data.</li>
+      <li><strong>Wajib:</strong> sertakan potongan kode perbandingan <strong>sinkron vs asinkron</strong> beserta screenshot urutan output konsol, lalu jelaskan perbedaan perilaku event loop.</li>
+      <li>Tampilkan <strong>loading indicator</strong> dan <strong>error state</strong> (offline/timeout).</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — <code>lib/services/async_demo_service.dart</code>, <code>AsyncComparisonScreen</code> &amp; <code>tool/sync_vs_async_demo.dart</code></div>
+<pre class="code">// Potongan perbandingan Sync (blocking) vs Async Event Loop (tool/sync_vs_async_demo.dart)
+// 1. SINKRON: memblokir thread selama durasi kerja berurutan (~700 ms total)
+_blockingWork(350); _blockingWork(350);
+
+// 2. ASINKRON (DART EVENT LOOP):
+order.add('1. Kode sinkron (awal)');
+Future(() =&gt; order.add('4. Future Event Queue (default)'));
+Future.delayed(const Duration(milliseconds: 20), () =&gt; order.add('5. Timer / Future.delayed'));
+scheduleMicrotask(() =&gt; order.add('3. Microtask Queue'));
+order.add('2. Kode sinkron (akhir)');
+// Urutan output: 1 (Sync awal) -&gt; 2 (Sync akhir) -&gt; 3 (Microtask) -&gt; 4 (Event Queue) -&gt; 5 (Timer)
+// Paralel: await Future.wait([fetchJadwal(), fetchRekamMedis()]) selesai dalam ~300 ms, bukan 600 ms.</pre>
+    <p><strong>Penjelasan Event Loop:</strong> Dart mengeksekusi seluruh instruksi sinkron hingga selesai terlebih dahulu, lalu menguras <strong>Microtask Queue</strong> (<code>scheduleMicrotask</code>) sebelum memproses antrean <strong>Event Queue</strong> (<code>Future</code>, I/O, <code>Timer</code>). Pada UI <code>AsyncComparisonScreen</code> (Drawer &rarr; Lab Asinkron &amp; Event Loop), tersedia tombol simulasi <em>Loading Indicator</em>, <em>Timeout</em> (<code>TimeoutException</code>), dan <em>Offline</em> (<code>SocketException</code>) yang ditangani <code>try-catch</code>.</p>
+  </div>
+</div>
+
+<!-- TUGAS 9 -->
+<div class="task-box">
+  <div class="task-head">Tugas 9 — Akses Network: Mengambil Data dari API <span class="badge b-green">CPMK053</span> <span class="badge b-green">Sub-CPMK0538</span> <span class="badge b-dark">3 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Konsumsi minimal 1 <strong>REST API publik</strong> menggunakan package <code>http</code>/<code>dio</code>.</li>
+      <li>Lakukan parsing JSON ke model class dan tampilkan di halaman aplikasi.</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — <code>lib/services/api_service.dart</code></div>
+    <p><code>ApiService</code> memakai package <code>http</code> untuk mengambil data dari <strong>DummyJSON</strong> (<code>https://dummyjson.com/users</code> untuk data dokter mitra &rarr; diparsing via <code>Doctor.fromDummyJsonUser()</code> dan <code>https://dummyjson.com/posts</code> untuk artikel edukasi kesehatan &rarr; diparsing via <code>HealthArticle.fromJson()</code>) dengan batas timeout 8 detik serta tombol pengalih sumber data Lokal vs REST API pada Tab Jadwal.</p>
+  </div>
+</div>
+
+<!-- TUGAS 10 -->
+<div class="task-box allow-split">
+  <div class="task-head">Tugas 10 — Penyimpanan Data Lokal <span class="badge b-green">CPMK053</span> <span class="badge b-green">Sub-CPMK0539</span> <span class="badge b-dark">3 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Implementasikan <strong>minimal 2</strong> dari: <strong>SQLite</strong>, <strong>Hive</strong>, <strong>SharedPreferences</strong>.</li>
+      <li>Data harus tetap ada setelah aplikasi ditutup dan dibuka kembali (buktikan dengan video).</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — Ketiga Penyimpanan Lokal Diimplementasikan</div>
+    <ul style="margin:3px 0 6px 16px;">
+      <li><strong>SQLite (<code>lib/services/database_helper.dart</code>):</strong> CRUD penuh tabel <code>medical_records</code> (versi 2 dengan kolom <code>document_photo_path</code>) dan <code>bookings</code> pada <code>sehatku_clinic.db</code> (plus fallback Hive saat berjalan di Flutter Web).</li>
+      <li><strong>Hive (<code>lib/services/local_storage_service.dart</code>):</strong> Menyimpan daftar ID dokter favorit dan profil medis pasien secara persisten.</li>
+      <li><strong>SharedPreferences:</strong> Menyimpan token sesi login, status Mode Gelap, pengingat kontrol H-1, tampilan kartu ringkas, dan filter poli terakhir.</li>
+    </ul>
+    
+    <figure class="shot">
+      <img src="file:///c:/Users/Kistract/Documents/Tugas/sehatku/docs/screenshots/06_medical_record_screen.png" alt="Gambar 5. Halaman Rekam Medis Pasien (CRUD SQLite Offline-First &amp; lampiran dokumen medis)" />
+      <figcaption>Gambar 5. Halaman Rekam Medis Pasien (CRUD SQLite Offline-First &amp; lampiran dokumen medis)</figcaption>
+    </figure>
+  
+  </div>
+</div>
+
+<!-- TUGAS 11 -->
+<div class="task-box allow-split">
+  <div class="task-head">Tugas 11 — Autentikasi Pengguna dengan MySQL <span class="badge b-green">CPMK053</span> <span class="badge b-green">Sub-CPMK05310</span> <span class="badge b-dark">3 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Buat backend sederhana (PHP/Node.js) yang menghubungkan aplikasi Flutter ke <strong>MySQL</strong> (tabel user dengan hash password).</li>
+      <li>Fitur: register, login, logout, proteksi halaman (redirect jika belum login). Sertakan ERD &amp; screenshot phpMyAdmin/DB.</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — Folder <code>backend/</code>, <code>database/mysql_sehatku_schema.sql</code> &amp; <code>AuthGate</code></div>
+    <p>Backend REST API PHP 8.3 PDO (<code>backend/index.php</code>) melayani endpoint <code>GET /api/health</code>, <code>POST /api/register</code>, <code>POST /api/login</code>, <code>GET /api/me</code>, dan <code>POST /api/logout</code> terhubung ke database MySQL <code>sehatku_db</code> (6 tabel: <code>polyclinics</code>, <code>users</code> dengan hash <code>bcrypt</code>, <code>doctors</code>, <code>doctor_schedules</code>, <code>appointments</code>, <code>medical_records</code>). Di sisi Flutter, <code>AuthGate</code> melindungi seluruh rute utama agar mengarahkan ke <code>LoginScreen</code> jika belum login (disertai opsi <em>Masuk Mode Demo Lokal</em> untuk pengujian tanpa server).</p>
+    <div class="svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820" font-family="Segoe UI, Inter, Arial, sans-serif">
+  <defs>
+    <style>
+      .bg { fill: #F8FAFC; }
+      .title { font-size: 22px; font-weight: 800; fill: #0F172A; }
+      .subtitle { font-size: 13px; fill: #475569; }
+      .zone-mysql { fill: #F0FDFA; stroke: #0D9488; stroke-width: 2; stroke-dasharray: 7,4; rx: 18; }
+      .zone-local { fill: #EFF6FF; stroke: #0284C7; stroke-width: 2; stroke-dasharray: 7,4; rx: 18; }
+      .zone-title-teal { font-size: 15px; font-weight: 800; fill: #0F766E; }
+      .zone-title-blue { font-size: 15px; font-weight: 800; fill: #0369A1; }
+      .tbl { fill: #FFFFFF; stroke: #334155; stroke-width: 1.8; rx: 10; }
+      .hdr-teal { fill: #0D9488; }
+      .hdr-blue { fill: #0284C7; }
+      .hdr-purple { fill: #7C3AED; }
+      .hdr-text { font-size: 13px; font-weight: 800; fill: #FFFFFF; }
+      .pk { font-size: 11px; font-weight: 700; fill: #B45309; }
+      .fk { font-size: 11px; font-weight: 700; fill: #0369A1; }
+      .col { font-size: 11.5px; fill: #1E293B; }
+      .type { font-size: 10.5px; fill: #64748B; }
+      .rel { stroke: #0F766E; stroke-width: 2; fill: none; }
+      .rel-sync { stroke: #0284C7; stroke-width: 2; stroke-dasharray: 6,4; fill: none; }
+      .cardinal { font-size: 11px; font-weight: 800; fill: #0F172A; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="820" class="bg" />
+  <text x="640" y="36" text-anchor="middle" class="title">ENTITY RELATIONSHIP DIAGRAM (ERD) — SISTEM KLINIK SEHATKU</text>
+  <text x="640" y="57" text-anchor="middle" class="subtitle">Tugas 11 (Desain Basis Data) • Kelompok 4 • Skema Relasional MySQL (Backend Auth &amp; Klinik) + SQLite / Hive / SharedPreferences (Penyimpanan Lokal Flutter)</text>
+
+  <!-- ======================================================= -->
+  <!-- ZONA 1: MYSQL BACKEND DATABASE                          -->
+  <!-- ======================================================= -->
+  <rect x="30" y="78" width="810" height="712" class="zone-mysql" />
+  <text x="50" y="106" class="zone-title-teal">A. BASIS DATA SERVER TERPUSAT — MySQL (`sehatku_db`)</text>
+
+  <!-- TABLE: users -->
+  <g transform="translate(55, 128)">
+    <rect width="235" height="232" class="tbl" />
+    <rect width="235" height="32" rx="9" class="hdr-teal" />
+    <text x="117" y="21" text-anchor="middle" class="hdr-text">users (Pasien &amp; Admin)</text>
+    <text x="12" y="52" class="pk">PK</text><text x="38" y="52" class="col">id</text><text x="155" y="52" class="type">INT AI</text>
+    <text x="38" y="72" class="col">rm_number</text><text x="155" y="72" class="type">VARCHAR(20) UQ</text>
+    <text x="38" y="92" class="col">nik</text><text x="155" y="92" class="type">CHAR(16) UQ</text>
+    <text x="38" y="112" class="col">full_name</text><text x="155" y="112" class="type">VARCHAR(100)</text>
+    <text x="38" y="132" class="col">email</text><text x="155" y="132" class="type">VARCHAR(100) UQ</text>
+    <text x="38" y="152" class="col">password_hash</text><text x="155" y="152" class="type">VARCHAR(255)</text>
+    <text x="38" y="172" class="col">phone</text><text x="155" y="172" class="type">VARCHAR(20)</text>
+    <text x="38" y="192" class="col">blood_type</text><text x="155" y="192" class="type">VARCHAR(5)</text>
+    <text x="38" y="212" class="col">role</text><text x="155" y="212" class="type">ENUM('pasien','admin')</text>
+  </g>
+
+  <!-- TABLE: polyclinics -->
+  <g transform="translate(55, 430)">
+    <rect width="235" height="150" class="tbl" />
+    <rect width="235" height="32" rx="9" class="hdr-teal" />
+    <text x="117" y="21" text-anchor="middle" class="hdr-text">polyclinics (Master Poli)</text>
+    <text x="12" y="52" class="pk">PK</text><text x="38" y="52" class="col">id</text><text x="155" y="52" class="type">INT AI</text>
+    <text x="38" y="72" class="col">code</text><text x="155" y="72" class="type">VARCHAR(10) UQ</text>
+    <text x="38" y="92" class="col">name</text><text x="155" y="92" class="type">VARCHAR(80)</text>
+    <text x="38" y="112" class="col">floor_location</text><text x="155" y="112" class="type">VARCHAR(50)</text>
+    <text x="38" y="132" class="col">queue_prefix</text><text x="155" y="132" class="type">CHAR(1)</text>
+  </g>
+
+  <!-- TABLE: doctors -->
+  <g transform="translate(345, 415)">
+    <rect width="235" height="212" class="tbl" />
+    <rect width="235" height="32" rx="9" class="hdr-teal" />
+    <text x="117" y="21" text-anchor="middle" class="hdr-text">doctors (Dokter Praktik)</text>
+    <text x="12" y="52" class="pk">PK</text><text x="38" y="52" class="col">id</text><text x="155" y="52" class="type">INT AI</text>
+    <text x="12" y="72" class="fk">FK</text><text x="38" y="72" class="col">polyclinic_id</text><text x="155" y="72" class="type">INT</text>
+    <text x="38" y="92" class="col">doctor_code</text><text x="155" y="92" class="type">VARCHAR(20) UQ</text>
+    <text x="38" y="112" class="col">full_name</text><text x="155" y="112" class="type">VARCHAR(120)</text>
+    <text x="38" y="132" class="col">str_number</text><text x="155" y="132" class="type">VARCHAR(40)</text>
+    <text x="38" y="152" class="col">room_number</text><text x="155" y="152" class="type">VARCHAR(20)</text>
+    <text x="38" y="172" class="col">consultation_fee</text><text x="155" y="172" class="type">INT</text>
+    <text x="38" y="192" class="col">daily_quota</text><text x="155" y="192" class="type">INT</text>
+  </g>
+
+  <!-- TABLE: doctor_schedules -->
+  <g transform="translate(345, 650)">
+    <rect width="235" height="122" class="tbl" />
+    <rect width="235" height="30" rx="9" class="hdr-teal" />
+    <text x="117" y="20" text-anchor="middle" class="hdr-text">doctor_schedules</text>
+    <text x="12" y="50" class="pk">PK</text><text x="38" y="50" class="col">id</text><text x="155" y="50" class="type">INT AI</text>
+    <text x="12" y="70" class="fk">FK</text><text x="38" y="70" class="col">doctor_id</text><text x="155" y="70" class="type">INT</text>
+    <text x="38" y="90" class="col">day_of_week</text><text x="155" y="90" class="type">VARCHAR(30)</text>
+    <text x="38" y="110" class="col">session_range</text><text x="155" y="110" class="type">VARCHAR(30)</text>
+  </g>
+
+  <!-- TABLE: appointments -->
+  <g transform="translate(595, 128)">
+    <rect width="230" height="232" class="tbl" />
+    <rect width="230" height="32" rx="9" class="hdr-teal" />
+    <text x="115" y="21" text-anchor="middle" class="hdr-text">appointments (Booking)</text>
+    <text x="12" y="52" class="pk">PK</text><text x="38" y="52" class="col">id</text><text x="150" y="52" class="type">INT AI</text>
+    <text x="12" y="72" class="fk">FK</text><text x="38" y="72" class="col">user_id</text><text x="150" y="72" class="type">INT</text>
+    <text x="12" y="92" class="fk">FK</text><text x="38" y="92" class="col">doctor_id</text><text x="150" y="92" class="type">INT</text>
+    <text x="38" y="112" class="col">queue_number</text><text x="150" y="112" class="type">VARCHAR(12)</text>
+    <text x="38" y="132" class="col">visit_date</text><text x="150" y="132" class="type">DATE</text>
+    <text x="38" y="152" class="col">session_time</text><text x="150" y="152" class="type">VARCHAR(30)</text>
+    <text x="38" y="172" class="col">payment_type</text><text x="150" y="172" class="type">ENUM('BPJS','Umum')</text>
+    <text x="38" y="192" class="col">complaint</text><text x="150" y="192" class="type">TEXT</text>
+    <text x="38" y="212" class="col">status</text><text x="150" y="212" class="type">ENUM(...)</text>
+  </g>
+
+  <!-- TABLE: medical_records (MySQL) -->
+  <g transform="translate(595, 415)">
+    <rect width="230" height="232" class="tbl" />
+    <rect width="230" height="32" rx="9" class="hdr-teal" />
+    <text x="115" y="21" text-anchor="middle" class="hdr-text">medical_records</text>
+    <text x="12" y="52" class="pk">PK</text><text x="38" y="52" class="col">id</text><text x="150" y="52" class="type">INT AI</text>
+    <text x="12" y="72" class="fk">FK</text><text x="38" y="72" class="col">appointment_id</text><text x="150" y="72" class="type">INT NULL</text>
+    <text x="12" y="92" class="fk">FK</text><text x="38" y="92" class="col">user_id</text><text x="150" y="92" class="type">INT</text>
+    <text x="12" y="112" class="fk">FK</text><text x="38" y="112" class="col">doctor_id</text><text x="150" y="112" class="type">INT</text>
+    <text x="38" y="132" class="col">diagnosis</text><text x="150" y="132" class="type">VARCHAR(180)</text>
+    <text x="38" y="152" class="col">prescription</text><text x="150" y="152" class="type">TEXT</text>
+    <text x="38" y="172" class="col">blood_pressure</text><text x="150" y="172" class="type">VARCHAR(20)</text>
+    <text x="38" y="192" class="col">body_weight_kg</text><text x="150" y="192" class="type">DECIMAL(5,2)</text>
+    <text x="38" y="212" class="col">next_control_date</text><text x="150" y="212" class="type">DATE NULL</text>
+  </g>
+
+  <!-- RELATION LINES IN MYSQL -->
+  <!-- users 1 -> N appointments -->
+  <path d="M290 200 L595 200" class="rel" />
+  <text x="302" y="193" class="cardinal">1</text>
+  <text x="578" y="193" class="cardinal">N</text>
+
+  <!-- users 1 -> N medical_records -->
+  <path d="M290 310 L460 310 L460 385 L640 385 L640 415" class="rel" />
+  <text x="302" y="304" class="cardinal">1</text>
+  <text x="647" y="408" class="cardinal">N</text>
+
+  <!-- polyclinics 1 -> N doctors -->
+  <path d="M290 505 L345 505" class="rel" />
+  <text x="298" y="498" class="cardinal">1</text>
+  <text x="332" y="498" class="cardinal">N</text>
+
+  <!-- doctors 1 -> N doctor_schedules -->
+  <path d="M462 627 L462 650" class="rel" />
+  <text x="470" y="640" class="cardinal">1:N</text>
+
+  <!-- doctors 1 -> N appointments -->
+  <path d="M510 415 L510 240 L595 240" class="rel" />
+  <text x="516" y="407" class="cardinal">1</text>
+  <text x="580" y="234" class="cardinal">N</text>
+
+  <!-- appointments 1 -> 0..1 medical_records -->
+  <path d="M710 360 L710 415" class="rel" />
+  <text x="718" y="378" class="cardinal">1</text>
+  <text x="718" y="408" class="cardinal">0..1</text>
+
+  <!-- ======================================================= -->
+  <!-- ZONA 2: PENYIMPANAN LOKAL FLUTTER (SQLITE + HIVE/PREFS) -->
+  <!-- ======================================================= -->
+  <rect x="865" y="78" width="385" height="712" class="zone-local" />
+  <text x="885" y="106" class="zone-title-blue">B. STORAGE LOKAL PERANGKAT (`sehatku_clinic.db`)</text>
+
+  <!-- SQLITE: bookings -->
+  <g transform="translate(890, 128)">
+    <rect width="335" height="196" class="tbl" />
+    <rect width="335" height="32" rx="9" class="hdr-blue" />
+    <text x="167" y="21" text-anchor="middle" class="hdr-text">SQLite: bookings (Antrean Lokal)</text>
+    <text x="14" y="52" class="pk">PK</text><text x="42" y="52" class="col">id</text><text x="225" y="52" class="type">INTEGER PK AI</text>
+    <text x="42" y="72" class="col">queue_number, doctor_id</text><text x="225" y="72" class="type">TEXT NOT NULL</text>
+    <text x="42" y="92" class="col">doctor_name, poli, room</text><text x="225" y="92" class="type">TEXT NOT NULL</text>
+    <text x="42" y="112" class="col">patient_name, patient_nik</text><text x="225" y="112" class="type">TEXT NOT NULL</text>
+    <text x="42" y="132" class="col">visit_date, session_time</text><text x="225" y="132" class="type">TEXT NOT NULL</text>
+    <text x="42" y="152" class="col">payment_type, complaint</text><text x="225" y="152" class="type">TEXT NOT NULL</text>
+    <text x="42" y="172" class="col">status, created_at</text><text x="225" y="172" class="type">TEXT NOT NULL</text>
+  </g>
+
+  <!-- SQLITE: medical_records -->
+  <g transform="translate(890, 355)">
+    <rect width="335" height="212" class="tbl" />
+    <rect width="335" height="32" rx="9" class="hdr-blue" />
+    <text x="167" y="21" text-anchor="middle" class="hdr-text">SQLite: medical_records (CRUD)</text>
+    <text x="14" y="52" class="pk">PK</text><text x="42" y="52" class="col">id</text><text x="225" y="52" class="type">INTEGER PK AI</text>
+    <text x="42" y="72" class="col">patient_name</text><text x="225" y="72" class="type">TEXT NOT NULL</text>
+    <text x="42" y="92" class="col">medical_record_number</text><text x="225" y="92" class="type">TEXT NOT NULL</text>
+    <text x="42" y="112" class="col">visit_date, poli</text><text x="225" y="112" class="type">TEXT NOT NULL</text>
+    <text x="42" y="132" class="col">doctor_name, diagnosis</text><text x="225" y="132" class="type">TEXT NOT NULL</text>
+    <text x="42" y="152" class="col">symptoms, treatment_prescription</text><text x="225" y="152" class="type">TEXT NOT NULL</text>
+    <text x="42" y="172" class="col">blood_pressure, body_weight_kg</text><text x="225" y="172" class="type">TEXT / REAL</text>
+    <text x="42" y="192" class="col">next_control_date, notes</text><text x="225" y="192" class="type">TEXT NOT NULL</text>
+  </g>
+
+  <!-- HIVE & SHARED PREFERENCES -->
+  <g transform="translate(890, 595)">
+    <rect width="335" height="172" class="tbl" />
+    <rect width="335" height="32" rx="9" class="hdr-purple" />
+    <text x="167" y="21" text-anchor="middle" class="hdr-text">Hive Box &amp; SharedPreferences</text>
+    <text x="16" y="54" class="fk">HIVE</text><text x="58" y="54" class="col">favorite_doctor_ids</text><text x="230" y="54" class="type">List&lt;String&gt;</text>
+    <text x="16" y="74" class="fk">HIVE</text><text x="58" y="74" class="col">sehatku_profile_box</text><text x="230" y="74" class="type">Map&lt;String,String&gt;</text>
+    <text x="16" y="102" class="pk">PREF</text><text x="58" y="102" class="col">pref_dark_mode</text><text x="230" y="102" class="type">BOOL</text>
+    <text x="16" y="122" class="pk">PREF</text><text x="58" y="122" class="col">pref_reminder_enabled</text><text x="230" y="122" class="type">BOOL</text>
+    <text x="16" y="142" class="pk">PREF</text><text x="58" y="142" class="col">pref_compact_cards</text><text x="230" y="142" class="type">BOOL</text>
+    <text x="16" y="160" class="pk">PREF</text><text x="58" y="160" class="col">pref_last_selected_poli</text><text x="230" y="160" class="type">STRING</text>
+  </g>
+
+  <!-- Sync Dashed Lines MySQL <-> SQLite -->
+  <path d="M825 225 L890 225" class="rel-sync" />
+  <path d="M825 500 L890 500" class="rel-sync" />
+</svg>
+<div style="font-size:7.8pt;color:#475569;margin-top:3px;"><strong>Gambar 6.</strong> Diagram ERD Basis Data SehatKu (<code>docs/erd/erd_sehatku_database.svg</code>)</div></div>
+    
+    <figure class="shot">
+      <img src="file:///c:/Users/Kistract/Documents/Tugas/sehatku/docs/screenshots/03_login_screen.png" alt="Gambar 7. LoginScreen dengan autentikasi MySQL PHP PDO &amp; Mode Demo Lokal" />
+      <figcaption>Gambar 7. LoginScreen dengan autentikasi MySQL PHP PDO &amp; Mode Demo Lokal</figcaption>
+    </figure>
+  
+  </div>
+</div>
+
+<!-- TUGAS 12 -->
+<div class="task-box">
+  <div class="task-head">Tugas 12 — Interaksi Perangkat Keras &amp; Notifikasi <span class="badge b-green">CPMK053</span> <span class="badge b-green">Sub-CPMK05311</span> <span class="badge b-dark">3 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Tampilkan <strong>local notification</strong> (<code>flutter_local_notifications</code>) sesuai studi kasus (jadwal kontrol).</li>
+      <li>Akses minimal 1 fitur perangkat: kamera/galeri (<code>image_picker</code>) atau info perangkat + penanganan permission.</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — <code>NotificationService</code> &amp; <code>MediaService</code></div>
+    <p><code>NotificationService</code> (<code>lib/services/notification_service.dart</code>) memakai <code>flutter_local_notifications</code> + <code>timezone</code> untuk menampilkan notifikasi instan saat booking berhasil serta uji pengingat kontrol H-1 di Tab Profil. <code>MediaService</code> (<code>lib/services/media_service.dart</code>) memakai <code>image_picker</code> dan <code>permission_handler</code> untuk memilih foto resep/hasil lab dari Galeri atau Kamera dan menyimpannya pada kolom <code>document_photo_path</code> SQLite.</p>
+  </div>
+</div>
+
+<!-- TUGAS 13 -->
+<div class="task-box cpmk012 allow-split">
+  <div class="task-head">Tugas 13 — Testing, Debugging &amp; TDD <span class="badge b-blue">CPMK012</span> <span class="badge b-blue">Sub-CPMK0122</span> <span class="badge b-dark">20 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li>Tulis minimal <strong>3 unit test</strong> + <strong>1 widget test</strong> menggunakan <code>flutter_test</code>; lampirkan hasil <code>flutter test</code>.</li>
+      <li>Terapkan <strong>TDD</strong> pada satu fitur: tulis test dulu &rarr; gagal &rarr; implementasi &rarr; lulus (sertakan log).</li>
+      <li><strong>Debugging:</strong> dokumentasikan 2 bug yang ditemukan, penyebab, dan solusinya.</li>
+      <li><strong>Penilaian proses sistem:</strong> analisis hasil testing terhadap alur bisnis aplikasi + rekomendasi perbaikan.</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — <code>test/evan_validation_tdd_test.dart</code> &amp; <code>docs/tdd_dan_testing_evan.md</code></div>
+    <p><strong>A. Pengujian Otomatis (13/13 Lulus):</strong> Gabungan dari <code>test/widget_test.dart</code> (4 test), <code>test/arif_features_test.dart</code> (4 test), dan <code>test/evan_validation_tdd_test.dart</code> (4 unit/TDD test pada <code>PatientValidator</code>: validasi NIK 16 digit &amp; nama, estimasi biaya BPJS/Umum &amp; waktu tunggu, cek ketersediaan jadwal, fungsi TDD <code>formatQueueNumber</code>; serta 1 widget test pada <code>ClinicPrepChecklistWidget</code>).</p>
+    <p><strong>B. Siklus TDD (Red &rarr; Green &rarr; Refactor) pada <code>PatientValidator.formatQueueNumber</code>:</strong> (1) <em>Red</em>: menulis ekspektasi <code>formatQueueNumber(poliCode: 'a', sequenceNumber: 7) == 'A-007'</code> dan melempar <code>ArgumentError</code> bila kode kosong/urut &lt; 1 &rarr; gagal (<code>Member not found: 'PatientValidator.formatQueueNumber'</code>); (2) <em>Green</em>: mengimplementasikan fungsi di <code>lib/utils/patient_validator.dart</code> &rarr; seluruh test lulus; (3) <em>Refactor</em>: merapikan docstring dan konvensi error.</p>
+    <p><strong>C. Dokumentasi 2 Bug Nyata Saat Integrasi:</strong></p>
+    <ol style="margin:2px 0 6px 16px;">
+      <li><strong>Bug Overflow UI Layar Mobile 390px &amp; Pending Timer di Async Demo (Commit <code>5f8250e</code>):</strong> <em>Penyebab:</em> <code>Row</code> pada <code>LoginScreen</code> &amp; <code>ProfileScreen</code> belum dibungkus <code>Expanded</code>/<code>Wrap</code> dan <code>Timer</code> simulasi timeout di <code>AsyncDemoService</code> belum dibatalkan saat selesai/teardown. <em>Solusi:</em> Penyesuaian layout responsif &amp; pemanggilan <code>timer.cancel()</code>. (Pada uji awal Mobile <code>ListView</code> di <code>MedicalRecordScreen</code> juga diperbaiki error <code>Spacer()</code> unbounded height).</li>
+      <li><strong>Bug Konflik Build APK Release AGP 9.1.0 vs <code>compileSdk 36</code> (Commit <code>7a63b96</code>):</strong> <em>Penyebab:</em> Plugin <code>flutter_local_notifications</code> dan <code>permission_handler</code> menuntut <code>compileSdk 37</code>. <em>Solusi:</em> Upgrade ke AGP <code>9.1.1</code>, set <code>compileSdk 37</code>, dan sinkronisasi plugin registrants hingga APK rilis <code>v1.0.0</code> berhasil dibangun.</li>
+    </ol>
+    <p><strong>D. Penilaian Proses Sistem &amp; Rekomendasi:</strong> Alur pendaftaran pasien (Login/Demo &rarr; Cari Dokter &rarr; Cek Kuota &rarr; Booking &rarr; Tiket QR &rarr; Rekam Medis Offline) sudah konsisten dan mencegah booking pada kuota 0 atau NIK tidak valid. <em>Rekomendasi:</em> (1) tambahkan sinkronisasi dua arah MySQL &harr; SQLite; (2) tambahkan halaman scanner QR di sisi resepsionis klinik; (3) tambahkan <code>integration_test</code> di perangkat Android nyata.</p>
+    
+    <figure class="shot">
+      <img src="file:///c:/Users/Kistract/Documents/Tugas/sehatku/docs/screenshots/02_hasil_flutter_test.png" alt="Gambar 8. Hasil eksekusi flutter test -r expanded (13/13 seluruh skenario pengujian lulus)" />
+      <figcaption>Gambar 8. Hasil eksekusi flutter test -r expanded (13/13 seluruh skenario pengujian lulus)</figcaption>
+    </figure>
+  
+  </div>
+</div>
+
+<!-- TUGAS 14 -->
+<div class="task-box cpmk093 allow-split">
+  <div class="task-head">Tugas 14 — Deployment &amp; Proyek Akhir <span class="badge b-orange">CPMK093</span> <span class="badge b-orange">Sub-CPMK0931</span> <span class="badge b-dark">34 Poin</span></div>
+  <div class="task-q">
+    <ul>
+      <li><strong>Build &amp; Deploy (17):</strong> hasilkan APK (debug/release) atau build Web; unggah ke GitHub Releases; README berisi cara instalasi &amp; menjalankan.</li>
+      <li><strong>Inovasi &amp; Nilai Bisnis (17):</strong> tambahkan minimal 1 fitur inovatif dan jelaskan nilai bagi bisnis/masyarakat serta keberlanjutan kewirausahaan digitalnya.</li>
+      <li>Presentasikan melalui <strong>video demo 3–5 menit</strong> + slide ringkas (masalah &rarr; solusi &rarr; demo &rarr; hasil testing &rarr; rencana pengembangan).</li>
+    </ul>
+  </div>
+  <div class="answer-box">
+    <div class="answer-title">Jawaban &amp; Bukti Implementasi — Release <code>v1.0.0</code>, Fitur Inovatif, Analisis Bisnis &amp; Video Demo</div>
+    <p><strong>A. Build &amp; Deploy:</strong> APK Release Android dan Flutter Web Bundle telah diunggah ke GitHub Releases (<code>https://github.com/arifquuu/sehatku/releases/tag/v1.0.0</code>), dilengkapi <code>README.md</code> berisi panduan instalasi MySQL, PHP backend, dan Flutter.</p>
+    <p><strong>B. Fitur Inovatif &amp; Nilai Kewirausahaan Digital:</strong></p>
+    <ul style="margin:3px 0 6px 16px;">
+      <li><strong>Tiket Antrean QR (<code>QrQueueTicketScreen</code>):</strong> Menggantikan karcis kertas, mempercepat check-in di meja pendaftaran, dan dilengkapi <em>quiet zone</em> putih tetap agar tetap terbaca pemindai saat Mode Gelap aktif.</li>
+      <li><strong>Mode Gelap &amp; Arsitektur Offline-First:</strong> Menjaga kenyamanan pasien dan memastikan riwayat resep/alergi tetap terbaca meski sinyal di klinik tidak stabil.</li>
+      <li><strong>Analisis Bisnis Berbasis <code>visitCountByPoli</code>:</strong> Grafik rekap kunjungan per poli di Tab Profil membantu manajemen klinik menjadwalkan dokter sesuai beban poli (Poli Umum &amp; Anak dialokasikan 2 shift dengan kuota lebih besar; Poli Penyakit Dalam/Spesialis dioptimalkan dengan pengingat kontrol H-1). Berpotensi dikembangkan menjadi model <strong>B2B SaaS Klinik Pratama</strong> (Freemium &rarr; Klinik Pro).</li>
+    </ul>
+    <div class="shot-grid">
+      
+    <figure class="shot">
+      <img src="file:///c:/Users/Kistract/Documents/Tugas/sehatku/docs/screenshots/08_qr_queue_ticket_screen.png" alt="Gambar 9. Tiket QR Antrean Klinik (QrQueueTicketScreen) siap pindai" />
+      <figcaption>Gambar 9. Tiket QR Antrean Klinik (QrQueueTicketScreen) siap pindai</figcaption>
+    </figure>
+  
+      
+    <figure class="shot">
+      <img src="file:///c:/Users/Kistract/Documents/Tugas/sehatku/docs/screenshots/07_profile_screen_rekap_poli.png" alt="Gambar 10. Tab Profil menampilkan Grafik Rekap Kunjungan per Poli (visitCountByPoli)" />
+      <figcaption>Gambar 10. Tab Profil menampilkan Grafik Rekap Kunjungan per Poli (visitCountByPoli)</figcaption>
+    </figure>
+  
+    </div>
+    <p><strong>C. Ringkasan Slide &amp; Video Demo (3–5 Menit):</strong> Materi 10 slide tersedia di <code>docs/slide_presentasi_sehatku.md</code> (Masalah &rarr; Solusi &rarr; Arsitektur &amp; UI &rarr; Demo &rarr; Testing/TDD &rarr; Analisis Bisnis &rarr; Rencana Pengembangan) dan naskah video demo tersedia di <code>docs/panduan_video_demo_sehatku.md</code>.</p>
+  </div>
+</div>
+
+<!-- ==================== JADWAL & RUBRIK & TANDA TANGAN ==================== -->
+<div class="section-bar">JADWAL PENGERJAAN (7 HARI)</div>
+<table>
+  <thead><tr><th style="width:14%;">Hari</th><th style="width:18%;">Tahap</th><th style="width:24%;">Topik / Tugas</th><th>Target Akhir Hari (Realisasi Kelompok 4)</th></tr></thead>
+  <tbody>
+    <tr><td>1 (Senin)</td><td>Fondasi</td><td>Topik 1–3 (Tugas 1, 2, 3)</td><td>Repo GitHub dibuat, analisis Flutter &amp; wireframe, <code>dart_basics</code>, tema &amp; UI dasar berjalan.</td></tr>
+    <tr><td>2 (Selasa)</td><td>Konten &amp; Navigasi</td><td>Topik 4–5 (Tugas 4, 5)</td><td>List dinamis 12 dokter + 4 halaman utama, <code>BottomNavigationBar</code>, Drawer, &amp; named routes terhubung.</td></tr>
+    <tr><td>3 (Rabu)</td><td>State Management</td><td>Topik 6–7 (Tugas 6, 7)</td><td>Widget <code>setState</code> (<code>ClinicPrepChecklistWidget</code>) + <code>MultiProvider</code> (<code>AuthProvider</code> &amp; <code>ClinicDataProvider</code>) aktif.</td></tr>
+    <tr><td>4 (Kamis)</td><td>Asinkron &amp; Data</td><td>Topik 8–9 (Tugas 8, 9)</td><td>Data REST API DummyJSON tampil + loading/error state + Lab perbandingan sync vs async.</td></tr>
+    <tr><td>5 (Jumat)</td><td>Penyimpanan Lokal</td><td>Topik 10 (Tugas 10)</td><td>SQLite CRUD (<code>medical_records</code> &amp; <code>bookings</code>), Hive, &amp; SharedPreferences berfungsi persisten.</td></tr>
+    <tr><td>6 (Sabtu)</td><td>Autentikasi &amp; Notif</td><td>Topik 11–12 (Tugas 11, 12)</td><td>Login/Register PHP PDO + MySQL (<code>bcrypt</code>), ERD, notifikasi lokal &amp; akses galeri/kamera aktif.</td></tr>
+    <tr><td>7 (Minggu)</td><td>Quality &amp; Release</td><td>Topik 13–14 (Tugas 13, 14)</td><td>13 unit/widget/TDD test lulus, bug log &amp; analisis bisnis selesai, APK &amp; Web rilis <code>v1.0.0</code>, laporan &amp; video demo.</td></tr>
+  </tbody>
+</table>
+
+<div class="section-bar">RUBRIK PENILAIAN AKHIR</div>
+<table>
+  <thead><tr><th style="width:24%;">Komponen</th><th>Indikator</th><th style="width:10%;text-align:center;">Bobot</th></tr></thead>
+  <tbody>
+    <tr><td>Fungsionalitas Aplikasi</td><td>Semua fitur per topik berjalan sesuai studi kasus (bukti video/screenshot)</td><td style="text-align:center;">40%</td></tr>
+    <tr><td>Kualitas Kode &amp; Arsitektur</td><td>Struktur rapi, reuse widget, state management tepat, commit merata antar anggota</td><td style="text-align:center;">20%</td></tr>
+    <tr><td>Dokumentasi &amp; Analisis Bisnis</td><td>Laporan, ERD, wireframe, hasil testing, rekomendasi proses (CPMK012)</td><td style="text-align:center;">20%</td></tr>
+    <tr><td>Deployment &amp; Inovasi</td><td>APK/Web siap pakai, README, fitur inovatif, kualitas presentasi (CPMK093)</td><td style="text-align:center;">20%</td></tr>
+  </tbody>
+</table>
+
+<div class="sig-row">
+  <div class="sig-col">
+    <div>Mengetahui,<br/>Ketua Program Studi Sistem Informasi</div>
+    <div class="sig-space"></div>
+    <div><strong>Ibnur Rusi, S.Kom., M.M.</strong><br/>NIP. ............................</div>
+  </div>
+  <div class="sig-col">
+    <div><br/>Dosen Pengampu,</div>
+    <div class="sig-space"></div>
+    <div><strong>Syahru Rahmayuda, S.Kom., M.Kom.</strong><br/>NIP. ............................</div>
+  </div>
+</div>
+
+</body>
+</html>
